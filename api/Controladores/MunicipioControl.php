@@ -12,6 +12,7 @@ class MunicipiosControl{
         }
         $response->getBody()->write($data);
         return $response;
+        
     }
 
     function getMunicipioId(Request $request, Response $response){
