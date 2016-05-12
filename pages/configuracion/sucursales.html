@@ -1,0 +1,406 @@
+<script>
+    function soloNumeros(e){
+        var key = window.Event ? e.which : e.keyCode
+        return (key >= 48 && key <= 57)
+    }
+</script>
+
+<div ng-controller="sucursalesController">
+	
+	<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-10">
+            <h2>Sucursales</h2>
+            <ol class="breadcrumb">
+                <li><a href="#configuracion/index">Inicio</a></li>
+                <li class="active"><strong >Registrar sucursales</strong></li>
+                <li class="active"><a href="#configuracion/empleadoadministrador"><strong >Paso 4 de 5</strong></a></li>
+            </ol>
+        </div>
+    </div><br>
+
+	<div class="col-md-6">
+    	<div class="ibox float-e-margins">
+    		<div class="ibox-title"><h5>{{title}}</h5></div>
+    		<dvi class="ibox-tools"></dvi>
+    		<div class="ibox-content">
+                <div class="google-map" id="mapa">
+
+                </div>
+    		</div>
+    		<div class="ibox-footer" >
+    		</div>
+    	</div>
+    </div>
+
+    <div class="col-md-6">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title"><h5>{{title}}</h5></div>
+            <dvi class="ibox-tools"></dvi>
+            <div class="ibox-content">
+                
+                <div class="row">
+                    <div class="col-md-6"></div>
+                    <div class="col-md-6"><h5>Seleccione Empresa</h5></div>    
+                </div>    
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-info"></i></span>
+                            <input type="text" class="form-control" placeholder="Nombre Sucursal" name="nombre" ng-model="Sucursal.nombre">
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-6">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-hand-o-right"></i></span>
+                            <select class="form-control" data-live-search="true" name="idempresas" ng-model="idempresa" placeholder="Empresa" ng-click="buscarservicio()">
+                                <option ng-repeat="empresa in empresas" value="{{empresa.id}}">      {{empresa.razonSocial}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-hand-o-right"></i></span> 
+                            <select class="form-control" data-live-search="true" name="departamento" ng-change="buscarmun()" ng-model="Sucursal.iddepartamento">
+                                <!--<option ng-repeat="departamento in departamentos" value="{{departamento.id}}">
+                                    {{departamento.nombre}}
+                                </option>-->
+                            </select>
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-hand-o-right"></i></span>
+                            <select class="form-control" data-live-search="true" name="listamunicipios" ng-model="Sucursal.idmunicipio" ng-click="geocoder()">
+                                <!--<option ng-repeat="municipio in municipios" value="{{municipio.id}}">
+                                    {{municipio.nombre}}
+                                </option>-->
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    
+                    <div class="col-md-6">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-road"></i></span>
+                            <input type="text" class="form-control" placeholder="Direccion" name="direccion" ng-model="Sucursal.direccion" ng-blur="buscarDireccion(Sucursal.direccion)">
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                            <input type="text" maxlength="10" size="10" class="form-control" placeholder="Telefono o Celular" name="telefono" onKeyPress="return soloNumeros(event)">
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Registrar Administrador</h4>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input type="text" class="form-control" placeholder="Nombre Admin" name="nombreadmin">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input type="text" class="form-control" placeholder="Apellido Admin" name="apellidoadministrador">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-info"></i></span>
+                            <input type="text" maxlength="10" size="10" class="form-control" placeholder="Identificación" name="idadmin" onKeyPress="return soloNumeros(event)">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                            <input type="text" maxlength="10" size="10" class="form-control" placeholder="Telefono" name="telefonoadmin" onKeyPress="return soloNumeros(event)">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                            <input type="email" class="form-control" placeholder="Email" name="email">
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
+                            <input type="password" class="form-control" placeholder="Contraseña" name="pass" ng-model="Sucursal.pass">
+                        </div>
+                    </div>
+                    <div class="col-md-6">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
+                            <input type="password" class="form-control" placeholder="Repetir Contraseña" name="pass1">
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Lista de servicios</h4>
+
+                        <div ng-if="verdad == false">
+                            <div class="checkbox">
+                                <div>
+                                    <form id="items"></form>
+                                </div>
+                            </div>
+                            
+                        </div>
+                
+                        <div class="checkbox" ng-if="verdad == true">
+                            <form id="idservis">
+                                
+                            </form>
+                        </div>
+
+                    </div>
+                    
+                    
+                    <div class="col-md-6">
+                        <h4>Lista De Tipo Turnos</h4>
+
+                        <div ng-if="turno == false">
+                            <div class="checkbox">
+                                <div>
+                                    <form id="turno"></form>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="checkbox" ng-if="turno == true">
+                            <form id="idturno">
+                                
+                            </form>
+                        </div><br>
+
+                    </div>
+
+                </div>    
+
+                
+                
+                <div class="row">
+
+                </div> 
+                
+                
+                
+            </div>
+            <div class="ibox-footer" ng-if="verdad == false">
+                <!--<button ng-click="verLocalizado()"></button>-->
+                <div style="margin-left: 40%" >
+                    <button ng-click="registrarSucursal()" type="button" class="btn btn-outline btn-primary dim">
+                        <i class="fa fa-check"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="ibox-footer" ng-if="verdad == true">
+                <div style="margin-left: 40%" >
+                    <button ng-click="updateSucursal()" type="button" class="btn btn-outline btn-primary dim">
+                        <i class="fa fa-check"></i>
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+	
+    <div class="col-md-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title"><h5>{{title1}}</h5></div>
+            <dvi class="ibox-tools"></dvi>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-bordered table-striped" ng-table="tableParams" show-filter="true">
+                            <tr ng-repeat="lista in $data">
+                                <td title="'Nombre Sucursal'" filter="{ 'nombre': 'text'}">{{lista.nombre}}</td>
+                                <td title="'Direccion'" filter="{ 'direccion': 'text'}">{{lista.direccion}}</td>
+                                <td title="'Telefono'" filter="{ 'telefono': 'text'}">{{lista.telefono}}</td>
+                                <td title="'Municipio'" filter="{ 'municipio': 'text'}">{{lista.municipio}}</td>
+                                <td title="'Estado'" filter="{ 'estado': 'text'}">
+                                    <span ng-if="lista.estado == 'INACTIVO'" style="color: red">{{lista.estado}}</span>
+                                    <span ng-if="lista.estado == 'ACTIVO'" style="color: green">{{lista.estado}}</span>
+                                </td>
+                                <td title="'Ajuste'">
+                                    <center ng-if="lista.estado=='ACTIVO'">
+                                        <a href="javascript:;" title="Editar" ng-click="get(lista)">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    </center>
+                                </td>
+                                <td title="'Activar'">
+                                    <center>
+                                        <a ng-if="lista.estado=='INACTIVO'" href="javascript:;" title="Activar servicio" ng-click="getestadoactivar(lista)">
+                                            <i class="fa fa-check"></i>
+                                        </a>
+                                        <a href="javascript:;" ng-if="lista.estado=='ACTIVO'" title="Desactivar servicio" ng-click="getestadodesactivar(lista)">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </center>
+                                </td>
+                                <td title="'Precios'">
+                                    <center ng-if="lista.estado=='ACTIVO'">
+                                        <a href="javascript:;" title="Agregar Precios" ng-click="modalprecios(lista)">
+                                            <i class="fa fa-money"></i>
+                                        </a>
+                                    </center>
+                                </td>
+                                <td title="'Tiempo * Servicio'">
+                                    <center><a href="javascript:;" title="Agregar horas" ng-click="modalhoras(lista)">
+                                        <i class="fa fa-clock-o"></i>
+                                    </a></center>
+                                </td>
+                            </tr>
+                        </table> 
+                    </div>
+                </div>
+                
+            </div>
+            <div class="ibox-footer" >
+                
+            </div>
+
+        </div>
+
+        <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content animated bounceInRight">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <i class="fa fa-laptop modal-icon"></i>
+                        <h4 class="modal-title">Desactivar Estado</h4>
+                        <small class="font-bold"></small>
+                    </div>
+                    <div class="modal-body">
+                        <h4><center>¿Desactivar estado de la sucursal?</center></h4>
+                        <h5><center></center></h5>
+                        <input type="hidden" name="" ng-model="empresa.estado">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="desactivarestado()">Desactivar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content animated bounceInRight">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <i class="fa fa-laptop modal-icon"></i>
+                        <h4 class="modal-title">Activar Estado</h4>
+                        <small class="font-bold"></small>
+                    </div>
+                    <div class="modal-body">
+                        <h4><center>¿Activar estado de la sucursal?</center></h4>
+                        <h5><center></center></h5>
+                        <input type="hidden" name="" ng-model="empresa.estado">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="activarestado()">Activar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal inmodal" id="myModalprecio" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content animated bounceInRight">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <i class="fa fa-laptop modal-icon"></i>
+                        <h4 class="modal-title">Precios por sucursal</h4>
+                        <small class="font-bold"></small>
+                    </div>
+                    <div class="modal-body">
+                        <h3><center>Agregar Percios a Sucursales</center></h3>
+                        <div id="campos" class="row">
+                            
+                        </div>
+                        <input type="hidden" name="" ng-model="empresa.estado">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                        <button type="button" class="btn btn-primary" ng-click="agregarprecios()">Aceptar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="modal inmodal" id="myModalhoras" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content animated bounceInRight">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <i class="fa fa-laptop modal-icon"></i>
+                        <h4 class="modal-title">Servicios De tiempo</h4>
+                        <h5 class="modal-title">Agregar En Minutos</h5>
+                        <small class="font-bold"></small>
+                    </div>
+                    <div class="modal-body">
+                        <div class="row">
+
+                            <form id="form">
+                                <span ng-repeat="tiempo in sucursalhoras">
+                                    <div class="col-md-6">
+                                        <h4>{{tiempo.servicio}}</h4>
+                                        <div class="input-group m-b">
+                                            <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                            <!--<ng-timepicker id="valor" ng-model="tiempo.minutos" init-time="{{tiempo.minutos}}" theme="red" step="5" ng-value="{{tiempo.minutos}}"></ng-timepicker>-->
+
+                                            <input type="number" name="horas" value="{{ tiempo.minutos }}" ng-model="tiempo.minutos" class="form-control" placeholder="Agregar por minutos">
+                                        </div>
+                                            <a href="javascript:;"  ng-click="agregarhoras(tiempo.minutos,tiempo)">
+                                                <i class="fa fa-check">Registrar</i>
+                                            </a>
+                                    </div>
+                                </span>                
+                            </form>
+                            
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+</div>

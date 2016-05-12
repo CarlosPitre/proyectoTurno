@@ -1,0 +1,233 @@
+<script>
+    function soloNumeros(e){
+        var key = window.Event ? e.which : e.keyCode
+        return (key >= 48 && key <= 57)
+    }
+</script>
+<div ng-controller="empleadoController">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-10">
+            <h2>Empleados</h2>
+            <ol class="breadcrumb">
+                <li><a href="#configuracion/index">Inicio</a></li>
+                <li class="active"><strong >Empleados</strong></li>
+            </ol>
+        </div>
+    </div><br>
+	<div class="col-md-10">
+    	<div class="ibox float-e-margins">
+    		<div class="ibox-title"><h5>{{title}}</h5></div>
+    		<dvi class="ibox-tools"></dvi>
+    		<div class="ibox-content">
+                <div class="row">
+                	<div class="col-md-5">
+    					<div class="input-group m-b">
+    						<span class="input-group-addon"><i class="fa fa-info"></i></span>
+    						<input type="text" maxlength="10" size="10" class="form-control" placeholder="Identificación" name="identificacion" onKeyPress="return soloNumeros(event)">
+    					</div>
+    				</div>
+                    <div class="col-md-5">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input type="text" class="form-control" placeholder="Nombres" name="nombres">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input type="text" class="form-control" placeholder="Apellidos" name="apellidos">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                            <input type="text" maxlength="10" size="10" class="form-control" placeholder="Telefono" name="telefono" onKeyPress="return soloNumeros(event)">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                            <input type="text" class="form-control" placeholder="Email" name="email">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                            <input type="password" class="form-control" placeholder="Contraseña" name="contrasena">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                            <input type="password" class="form-control" placeholder="Repetir Contraseña" name="contrasena1">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Registrar Servicios</h4>
+                    </div>
+                </div>
+
+                <div class="row" ng-if="verdad == false">
+                    <div ng-repeat="servis in listaserviciosucursal" class="checkbox">
+                        <div class="col-xs-6">
+                            <label>
+                                <input type="checkbox" name="servisucur" value="servis.idServicio" ng-click="agregarservicios(servis,$event)"> {{servis.servicio}}
+                            </label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row" ng-if="verdad == true"> 
+                    <div class="checkbox">
+                        <div>
+                            <form id="items"></form>
+                        </div>
+                    </div>
+                </div>
+                
+    			
+    		</div>
+    		<div class="ibox-footer" ng-if="verdad == false">
+    			<div style="margin-left: 40%">
+    				<button ng-click="registrarempleado()" type="button" class="btn btn-outline btn-primary dim">
+    					<i class="fa fa-check"></i>
+    				</button>
+    			</div>
+    		</div>
+            <div class="ibox-footer" ng-if="verdad == true">
+                <div style="margin-left: 40%">
+                    <button ng-click="putEmpleado()" type="button" class="btn btn-outline btn-primary dim">
+                        <i class="fa fa-check"></i>
+                    </button>
+                </div>
+            </div>
+    	</div>
+    </div>
+
+    <div class="col-md-10" >
+        <div class="ibox float-e-margins">
+            <div class="ibox-title"><h5>{{title1}}</h5></div>
+            <dvi class="ibox-tools"></dvi>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Identificacion</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Telefono</th>
+                                <th>Estado</th>
+                                <th>Ajuste</th>
+                                <th>Activar</th>
+                            </tr>
+                        </thead>
+                        <tbody id="tabla1">
+                            <tr ng-repeat="empleado in Empleado | filter:paginate">
+                                <td>{{empleado.identificacion}}</td>
+                                <td>{{empleado.nombres}}</td>
+                                <td>{{empleado.apellidos}}</td>
+                                <td>{{empleado.telefono}}</td>
+                                <td>{{empleado.estado}}</td>
+                                <td>
+                                    <center ng-if="empleado.estado=='ACTIVO'">
+                                        <a href="javascript:;" title="Editar" ng-click="get(empleado)">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    </center>
+                                </td>
+                                <td>
+                                    <center>
+                                        <a ng-if="empleado.estado=='INACTIVO'" href="javascript:;" title="Activar servicio" ng-click="getestadoactivar(empleado)">
+                                            <i class="fa fa-check"></i>
+                                        </a>
+                                        <a href="javascript:;" ng-if="empleado.estado=='ACTIVO'" title="Desactivar servicio" ng-click="getestadoinactivo(empleado)">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </center>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>Identificacion</th>
+                                <th>Nombres</th>
+                                <th>Apellidos</th>
+                                <th>Telefono</th>
+                                <th>Estado</th>
+                                <th>Ajuste</th>
+                                <th>Activar</th>
+                        </tr>
+                        </tfoot>
+                        </table>    
+                        <pagination total-items="totalItems" ng-model="currentPage"  
+                             max-size="10" boundary-links="true"  
+                             items-per-page="numPerPage" class="pagination-sm"> 
+                        </pagination> 
+                    </div>
+                </div>
+
+                <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content animated bounceInRight">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <i class="fa fa-laptop modal-icon"></i>
+                                <h4 class="modal-title">Desactivar Empleado</h4>
+                                <small class="font-bold"></small>
+                            </div>
+                            <div class="modal-body">
+                                <h4><center>¿Desactivar estado del empleado?</center></h4>
+                                <h5><center></center></h5>
+                                <input type="hidden" name="" ng-model="empresa.estado">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" ng-click="putEstadoEmpleado()">Desactivar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content animated bounceInRight">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <i class="fa fa-laptop modal-icon"></i>
+                                <h4 class="modal-title">Activar Empleado</h4>
+                                <small class="font-bold"></small>
+                            </div>
+                            <div class="modal-body">
+                                <h4><center>¿Activar estado del empleado?</center></h4>
+                                <h5><center></center></h5>
+                                <input type="hidden" name="" ng-model="empresa.estado">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" ng-click="putEstadoEmpleado2()">Activar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="ibox-footer" >
+                
+            </div>
+        </div>
+    </div>
+
+</div>

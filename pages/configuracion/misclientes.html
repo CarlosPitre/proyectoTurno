@@ -1,0 +1,41 @@
+<div ng-controller="misclienteController">
+	<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-10">
+            <h2>Mis Clientes</h2>
+            <ol class="breadcrumb">
+                <li><a href="#configuracion/index">Inicio</a></li>
+                <li class="active"><strong >Mis Clientes</strong></li>
+            </ol>
+        </div>
+    </div><br>
+
+	<div class="col-md-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title"><h5>Lista De Cliente</h5></div>
+			<div class="ibox-content">
+				<div class="input-group m-b">
+					<span class="input-group-addon"><i class="fa fa-info"></i></span>
+					<input type="text" maxlength="10" size="10" class="form-control" placeholder="Busqueda" ng-model = "filtro">
+				</div>
+				<div class="row">
+					<div class="table-responsive">
+						<table class="table table-condensed table-bordered table-striped" ng-table="tableParams" class="table table-hover" show-filter="true">
+							<tr ng-repeat="cliente in misClientes | filter : filtro">
+								<td title="'Email'">{{cliente.email}}</td>
+				                <td title="'Nombre'">{{cliente.nombres}}</td>
+				                <td title="'Apellidos'">{{cliente.apellidos}}</td>
+				                <td title="'Telefono'">{{cliente.telefono}}</td>
+				                <td>
+				                	<a href="#/configuracion/cliente/{{cliente.id}}/reservas">Ver Turnos</a>
+				                </td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+</div>

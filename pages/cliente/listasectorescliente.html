@@ -1,0 +1,60 @@
+<div ng-controller="listasectorclienteController">
+
+	<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-10">
+            <h2>{{title}}</h2>
+            <ol class="breadcrumb">
+                <li><a href="">Inicio</a></li>
+                <li class="active"><strong >Sectores</strong></li>
+            </ol>
+        </div>
+    </div><br>
+
+    <div class="wrapper wrapper-content animated fadeIn">
+    	
+		<div class="col-md-12">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>Lista De Sectores Activos</h5>
+				</div>
+				<div class="ibox-content no-padding border-left-right">
+					<div class="list-group" n>
+						<div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-search"></i></span>
+                            <input type="text" class="form-control" placeholder="Buscar" name="nombresector" ng-model="search.nombre">
+                        </div>
+						<div class="list-group" ng-repeat="sector in Sector | filter:search">
+							<div class="col-md-4">
+								<span ng-if="sector.aplicaReserva == 'NO'">
+									<a href="#cliente/sectormapas/{{sector.id}}" class="list-group-item">
+										<td ng-if="sector.logo!=null">
+		                                    <img src="./api/{{sector.logo}}" height="40px">
+		                                </td>
+										<h4>{{sector.nombre}}</h4>
+										<h5>{{sector.descripcion}}</h5>
+									</a>
+								</span>
+								<span ng-if="sector.aplicaReserva == 'SI'"> 
+									<a href="#cliente/mapareserva/{{sector.id}}" class="list-group-item">
+										<td ng-if="sector.logo!=null">
+		                                    <img src="./api/{{sector.logo}}" height="40px">
+		                                </td>
+										<h4>{{sector.nombre}}</h4>
+										<h5>{{sector.descripcion}}</h5>
+									</a>
+								</span>
+							</div>
+						</div>
+					</div>
+					
+				</div>
+
+				<div class="ibox-content profile-content">
+
+				</div>
+			</div>
+		</div>
+
+    </div>
+	
+</div>

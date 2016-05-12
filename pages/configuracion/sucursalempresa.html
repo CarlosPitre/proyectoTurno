@@ -1,0 +1,57 @@
+<div ng-controller="sucursalempresaController">
+	
+	<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-10">
+            <h2>Sucursales</h2>
+            <ol class="breadcrumb">
+                <li><a href="#configuracion/index">Inicio</a></li>
+                <li class="active"><strong >Registrar sucursales</strong></li>
+            </ol>
+        </div>
+    </div><br>
+
+    <div class="col-md-12" style="height: 440px ">
+    	<div class="ibox float-e-margins">
+    		<div class="ibox-title"><h5>{{title}}</h5></div>
+    		<dvi class="ibox-tools"></dvi>
+    		<div class="ibox-content">
+                <div class="row">
+                    <div class="">
+                        <div id="map" class="google-map" style="width: 992px; height: 390px;margin-left: 1%;"></div>
+                    </div>
+                </div>
+    			
+    		</div>
+    		<div class="ibox-footer" >
+    		</div>
+    	</div>
+    </div>
+
+    <div class="col-md-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title"><h5></h5></div>
+            <dvi class="ibox-tools"></dvi>
+            <div class="ibox-content">
+                
+				
+                
+            </div>
+            <div class="ibox-footer" ng-if="verdad == false">
+                <!--<button ng-click="verLocalizado()"></button>-->
+                <div style="margin-left: 40%" >
+                    <button ng-click="registrarSucursal()" type="button" class="btn btn-outline btn-primary dim">
+                        <i class="fa fa-check"></i>
+                    </button>
+                </div>
+            </div>
+            <div class="ibox-footer" ng-if="verdad == true">
+                <div style="margin-left: 40%" >
+                    <button ng-click="updateSucursal()" type="button" class="btn btn-outline btn-primary dim">
+                        <i class="fa fa-check"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

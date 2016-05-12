@@ -1,0 +1,89 @@
+<div ng-controller="turnoserviciosController">
+	
+	<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-10">
+            <h2>Lista Servicios</h2>
+            <ol class="breadcrumb">
+                <li><a href="#configuracion/index">Inicio</a></li>
+                <li><a href="#configuracion/turnos">Ver Servicios</a></li>
+                <li class="active"><strong >Lista De Pedidos</strong></li>
+            </ol>
+        </div>
+    </div><br>
+
+    <div class="wrapper wrapper-content animated fadeIn">
+    	<div class="row">
+			<div class="col-md-8">
+                <div class="tabs-container">
+                    <ul class="nav nav-tabs">
+                        <li class="active"><a data-toggle="tab" href="/#tab-1"> En Cola</a></li>
+                        <li class=""><a data-toggle="tab" href="/#tab-2">En Espera</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div id="tab-1" class="tab-pane active">
+                            <div class="panel-body" >
+								<div ng-if="estadocola == false">
+									<h3>No hay turnos en cola</h3>
+								</div>
+								<div ng-if="estadocola == true">
+									<ul class="list-group" ng-repeat="cola in Cola">
+										<li class="list-group-item">
+											{{cola.nombres}} {{cola.apellidos}}  
+											<span class="label label-default label-pill pull-xs-right">{{cola.fechaSolicitud}}  <input type="hidden" name="idturno" value="{{cola.id}}"></span>
+											<div ng-if="$index == 0" style="margin-left: 70%; margin-top: -20px">
+													<div ng-if="cola.estadoTurno == 'CONFIRMADO'">
+														<button type="button" class="btn btn-primary" ng-click="putestadoturno()">Atender</button>
+														<span ng-if="cola.aplazado == '0'">
+															<button type="button" class="btn btn-danger" ng-click="putaplazarturno()">Aplazar</button>
+														</span>
+														<span ng-if="cola.aplazado == '1'">
+															<button type="button" class="btn btn-danger" ng-click="putestadoturnofinalizado()">Cancelar</button>
+														</span>
+													</div>
+													<div ng-if="cola.estadoTurno == 'ATENDIENDO'">
+														<button type="button" class="btn btn-danger" ng-click="putestadoturnofinalizado()">Siguiente</button>
+													</div>
+													<!--<div ng-if="cola.aplazado == '1'">
+														<button type="button" class="btn btn-danger" ng-click="putestadoturnofinalizado()">Cancelar</button>
+													</div>-->
+											</div>
+										</li>
+									</ul>
+								</div>  
+                            </div>
+                        </div>
+                        <div id="tab-2" class="tab-pane">
+                            <div class="panel-body">
+                                <div ng-if="estadoespera == false">
+									<h3>No hay turnos en espera</h3>
+								</div>
+								<div ng-if="estadoespera == true">
+									<ul class="list-group" ng-repeat="espera in Espera">
+										<li class="list-group-item">
+											{{espera.nombres}} {{espera.apellidos}}  
+											<span class="label label-default label-pill pull-xs-right">{{espera.fechaSolicitud}}  <input type="hidden" name="idturno" value="{{espera.id}}"></span>
+										</li>
+										<div ng-if="$index == 0">
+												<div class="row">
+													<div class="col-md-5" style="margin-top: -37px; margin-left: 350px">
+														<button type="button" class="btn btn-danger" ng-click="putestadoturnocancelar()">Cancelar</button>
+													</div>
+												</div>
+												<div class="row">
+													<div class="col-md-5" style="margin-top: -36px; margin-left: 450px">
+														<button type="button" class="btn btn-primary" ng-click="putestadoturnoaceptar()">Aceptar</button>
+													</div>
+												</div>
+										</div>
+									</ul>
+								</div> 
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+		</div>
+    </div>
+
+</div>

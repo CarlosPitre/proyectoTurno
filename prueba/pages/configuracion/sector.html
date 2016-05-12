@@ -1,0 +1,417 @@
+ <div ng-controller="sectorController">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-10">
+            <h2>Sector</h2>
+            <ol class="breadcrumb">
+                <li><a href="#configuracion/index">Inicio</a></li>
+                <li class="active"><strong >Sectores</strong></li>
+                <li class="active"><a href="#configuracion/servicios"><strong >Paso 1 de 5</strong></a></li>
+            </ol>
+        </div>
+    </div><br>
+	<div class="col-md-5">
+    	<div class="ibox float-e-margins">
+    		<div class="ibox-title"><h5>{{title}}</h5></div>
+    		<dvi class="ibox-tools"></dvi>
+    		<div class="ibox-content">
+                
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-keyboard-o"></i></span>
+                            <input type="text" class="form-control" placeholder="Nombre Sector" name="nombresector" id="required">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-list-ol"></i></span>
+                            <input type="number" class="form-control" placeholder="Turnos" name="cupos">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-10">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-clipboard"></i></span>
+                            <!--<input type="text" class="form-control" placeholder="Descripcion" name="email">-->
+                            <textarea class="form-control" name="descripcion" placeholder="Descripcion" rows="3" ng-required="required"></textarea>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div col-md-7>
+                        <center><h3>Activar turnos aleatorios</h3></center>
+                    </div>
+                </div>
+                <form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="i-checks"><label><input type="radio" value="1" name="radio"> <i></i> Activo</label></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="i-checks"><label><input type="radio"  value="0" name="radio"> <i></i> Desactivar</label></div>
+                        </div>
+                    </div><br>
+                </form>
+                <div class="row">
+                    <div col-md-7>
+                        <center><h3>Aplicar Agenda Reserva</h3></center>
+                    </div>
+                </div>
+                <form>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="i-checks"><label><input type="radio" value="SI" name="reserva"> <i></i> SI</label></div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="i-checks"><label><input type="radio"  value="No" name="reserva"> <i></i> NO</label></div>
+                        </div>
+                    </div><br>
+                </form>
+                <div class="row">
+                    <div col-md-7>
+                        <center><h3>Logo del sector</h3></center>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-7">
+                        <span style="padding-left: 10px">
+                            <div id="image" style="width: 60%; height: 60px; top: 2em;margin-left: 4%;margin-top: -2%">
+                                <!--<img src="images/company.png" alt="image" class="img-circle">-->
+                            </div>
+                        </span>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="" style="padding-left: 12%; margin-top: -2%">
+                            <div class="input-group">
+                                <span class="file-input btn btn-block btn-primary btn-file" >
+                                    <i class="fa fa-camera"></i>
+                                    <input id="files" type="file">
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    
+                </div>
+                
+    		</div>
+    		<div class="ibox-footer" >
+    			<div style="margin-left: 40%">
+    				<button ng-click="registrar()" type="button" class="btn btn-outline btn-primary dim" id="showsimple">
+    					<i class="fa fa-check"></i>
+    				</button>
+                    <!--<button type="button" class="btn btn-primary" id="showsimple" ng-click="toash()">Show Toast</button>-->
+                    <!--<button class="ladda-button ladda-button-demo btn btn-primary"  data-style="zoom-in" ng-click="guardarcampos()">Guardar</button>-->
+    			</div>
+    		</div>
+    	</div>
+    </div>
+
+    <div class="col-md-7">
+    	<div class="ibox float-e-margins">
+    		<div class="ibox-title"><h5>{{title1}}</h5></div>
+    		<dvi class="ibox-tools"></dvi>
+    		<div class="ibox-content">
+                <div class="row">
+                	<div class="table-responsive">
+	                    <table class="table table-condensed table-bordered table-striped" ng-table="tableParams" class="table table-hover" show-filter="true">
+                            <tr ng-repeat="sector in $data">
+                                <td title="'Logo'" ><img src="/api/{{sector.logo}}" height="30px"></td>
+                                <td title="'Nombre'" filter="{ 'nombre': 'text'}">{{sector.nombre}}</td>
+                                <td title="'Descripcion'" filter="{ 'descripcion': 'text'}">{{sector.descripcion}}</td>
+                                <td title="'Estado'" filter="{ 'estado': 'text'}"><span ng-if="sector.estado == 'INACTIVO'" style="color: red">{{sector.estado}}</span>
+                                    <span ng-if="sector.estado == 'ACTIVO'" style="color: green">{{sector.estado}}</span></td>
+                                <td title="'Cupos'" filter="{ 'cupos': 'text'}">{{sector.cupos}}</td>
+                                <td title="'Ajuste'">
+                                    <center>
+                                        <center>
+                                            <a href="javascript:;" title="Editar" ng-click="get(sector)">
+                                                <i class="fa fa-pencil"></i>
+                                            </a>
+                                        </center>
+                                    </center>
+                                </td>
+                                <td title="'Activar'">
+                                    <center>
+                                        <a ng-if="sector.estado=='INACTIVO'" href="javascript:;" title="Activar servicio" ng-click="getestado(sector)">
+                                            <i class="fa fa-check"></i>
+                                        </a>
+                                        <a href="javascript:;" ng-if="sector.estado=='ACTIVO'" title="Desactivar servicio" ng-click="getestadodesactivar(sector)">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </center>
+                                </td>
+                            </tr>
+                        </table>
+		        </div>
+                </div>
+
+                <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content animated bounceInRight">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <!--<i class="fa fa-laptop modal-icon"></i>-->
+                                <h4 class="modal-title">Actualizar Sectores</h4>
+                                <div ng-if="sectores.logo != null">
+                                    <img ng-src="./api/{{sectores.logo}}" height="30px">
+                                </div>
+                                <div ng-if="sectores.logo == null">
+                                    <img src="./api/imagenes/noencontrado.png" height="30px">
+                                </div>
+                                
+                                
+                                <small class="font-bold"></small>
+                            </div>
+                            <div class="modal-body">
+                                <h4><center>Actualizar Sectores</center></h4>
+                                <h5><center></center></h5>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="input-group m-b">
+                                            <span class="input-group-addon"><i class="fa fa-keyboard-o"></i></span>
+                                            <input type="text" class="form-control" placeholder="Nombre" name="nit" ng-model="sectores.nombre">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="input-group m-b">
+                                            <span class="input-group-addon"><i class="fa fa-list-ol"></i></span>
+                                            <input type="text" class="form-control" placeholder="Cupos" name="nit" ng-model="sectores.cupos">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="input-group m-b">
+                                            <span class="input-group-addon"><i class="fa fa-clipboard"></i></span>
+                                            <textarea class="form-control" name="descripcion" placeholder="Descripcion" rows="3" ng-model="sectores.descripcion"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <center><h3>Aleatorios</h3></center>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                    <span ng-if="sectores.aleatorio == '0'">
+                                        <div class="col-md-5">
+                                            <div class="i-checks"><label><input type="radio" value="1" name="radio1" ng-model="sectores.aleatorio"> <i></i> Activo</label></div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="i-checks"><label><input type="radio"  value="0" name="radio1" checked="true" ng-model="sectores.aleatorio"> <i></i> Desactivar</label></div>
+                                        </div>
+                                    </span>
+                                    <span ng-if="sectores.aleatorio == '1'">
+                                        <div class="col-md-5">
+                                            <div class="i-checks"><label><input type="radio" value="1" name="radio2" checked="true" ng-model="sectores.aleatorio"> <i></i> Activo</label></div>
+                                        </div>
+                                        <div class="col-md-5">
+                                            <div class="i-checks"><label><input type="radio"  value="0" name="radio2" ng-model="sectores.aleatorio"> <i></i> Desactivar</label></div>
+                                        </div>
+                                    </span>
+                                </div>
+                                <center><h3>Reservas</h3></center>
+                                <div class="row">
+                                    <div class="col-md-2"></div>
+                                        <span ng-if="sectores.aplicaReserva == 'NO'">
+                                            <div class="col-md-5">
+                                                <div class="i-checks"><label><input type="radio" value="SI"  name="reserva2" checked="false" ng-model="sectores.aplicaReserva"> <i></i> SI</label></div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="i-checks"><label><input type="radio"  value="NO" name="reserva2" checked="true" ng-model="sectores.aplicaReserva"> <i></i> NO</label></div>
+                                            </div>
+                                        </span>
+                                        <span ng-if="sectores.aplicaReserva == 'SI'">
+                                            <div class="col-md-5">
+                                                <div class="i-checks"><label><input type="radio" value="SI" name="reserva1" checked="true" ng-model="sectores.aplicaReserva"> <i></i> SI</label></div>
+                                            </div>
+                                            <div class="col-md-5">
+                                                <div class="i-checks"><label><input type="radio"  value="NO" name="reserva1" ng-model="sectores.aplicaReserva"> <i></i> NO</label></div>
+                                            </div>
+                                        </span>
+                                </div>
+                                
+                                <div class="row">
+                                    <form id="listaturno"></form>
+                                </div>
+                                <h3><center>Logo Sector</center></h3>
+                                <div class="row">
+                                    <div class="col-md-7">
+                                        <span style="padding-left: 10px">
+                                            <div id="image1" style="width: 60%; height: 60px; top: 2em;margin-left: 4%;margin-top: -2%">
+                                                <!--<img src="images/company.png" alt="image" class="img-circle">-->
+                                            </div>
+                                        </span>
+                                    </div>
+                                    <div class="col-md-5">
+                                        <div class="col-xs-5">
+                                            <div class="" style="padding-left: 12%; margin-top: -2%">
+                                                <div class="input-group">
+                                                    <span class="file-input btn btn-block btn-primary btn-file" >
+                                                        <i class="fa fa-camera"></i>
+                                                        <input id="files1" type="file">
+                                                    </span>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" ng-click="modificarservicio()">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    			
+                <div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content animated bounceInRight">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <i class="fa fa-laptop modal-icon"></i>
+                                <h4 class="modal-title">Activar Estado</h4>
+                                <small class="font-bold"></small>
+                            </div>
+                            <div class="modal-body">
+                                <h4><center>¿Activar estado del servicio?</center></h4>
+                                <h5><center></center></h5>
+                                <input type="hidden" name="" ng-model="empresa.estado">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" ng-click="activarestado()">Activar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content animated bounceInRight">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <i class="fa fa-laptop modal-icon"></i>
+                                <h4 class="modal-title">Desactivar Estado</h4>
+                                <small class="font-bold"></small>
+                            </div>
+                            <div class="modal-body">
+                                <h4><center>Desactivar estado del servicio?</center></h4>
+                                <h5><center></center></h5>
+                                <input type="hidden" name="" ng-model="empresa.estado">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" ng-click="desactivarestado()">Desactivar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>    
+
+    		</div>
+    		
+    	</div>
+    </div>
+</div>
+
+<script>
+
+    $(document).ready(function () {
+                $('.i-checks').iCheck({
+                    checkboxClass: 'icheckbox_square-green',
+                    radioClass: 'iradio_square-green',
+                });
+            });
+
+    function archivo(evt) {
+        var files = evt.target.files; // FileList object
+
+        //Obtenemos la imagen del campo "file". 
+        for (var i = 0, f; f = files[i]; i++) {
+            //Solo admitimos imágenes.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+
+            var reader = new FileReader();
+
+            reader.onload = (function(theFile) {
+                return function(e) {
+                    // Creamos la imagen.
+                    document.getElementById("image").innerHTML = ['<img class="profile-user-img img-responsive img-circle" alt="User profile picture" id="img" style="width: 40%" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
+                };
+            })(f);
+            reader.readAsDataURL(f);
+        }
+    }
+    
+    document.getElementById('files').addEventListener('change', archivo, false);
+
+    $(':file').change(function(){
+        //obtenemos un array con los datos del archivo
+        var file = $("#files")[0].files[0];
+        //obtenemos el nombre del archivo
+        var fileName = file.name;
+        //obtenemos la extensión del archivo
+        //document.getElementById("nombreImagen").value=fileName;
+        fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
+        //obtenemos el tamaño del archivo
+        var fileSize = file.size;
+        //obtenemos el tipo de archivo image/png ejemplo
+        var fileType = file.type;
+        
+        $("#cambiar").show();
+        //mensaje con la información del archivo
+        // alert("<span class='info'>Archivo para subir: "+fileName+", peso total: "+fileSize+" bytes.</span>");
+    });
+
+
+    function archivo2(evt) {
+        var files = evt.target.files; // FileList object
+
+        //Obtenemos la imagen del campo "file". 
+        for (var i = 0, f; f = files[i]; i++) {
+            //Solo admitimos imágenes.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+
+            var reader = new FileReader();
+
+            reader.onload = (function(theFile) {
+                return function(e) {
+                    // Creamos la imagen.
+                    document.getElementById("image1").innerHTML = ['<img class="profile-user-img img-responsive img-circle" alt="User profile picture" id="img" style="width: 30%" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
+                };
+            })(f);
+            reader.readAsDataURL(f);
+        }
+    }
+    
+    document.getElementById('files1').addEventListener('change', archivo2, false);
+
+    $(':file').change(function(){
+        //obtenemos un array con los datos del archivo
+        var file = $("#files")[0].files[0];
+        //obtenemos el nombre del archivo
+        var fileName = file.name;
+        //obtenemos la extensión del archivo
+        //document.getElementById("nombreImagen").value=fileName;
+        fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
+        //obtenemos el tamaño del archivo
+        var fileSize = file.size;
+        //obtenemos el tipo de archivo image/png ejemplo
+        var fileType = file.type;
+        
+        $("#cambiar").show();
+        //mensaje con la información del archivo
+        // alert("<span class='info'>Archivo para subir: "+fileName+", peso total: "+fileSize+" bytes.</span>");
+    });
+
+</script>

@@ -1,0 +1,94 @@
+<div ng-controller="listasucursalesreporteController">
+	
+	<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-10">
+            <h2>Lista de sucursales</h2>
+            <ol class="breadcrumb">
+                <li><a href="#configuracion/index">Inicio</a></li>
+                <li class="active"><strong >Lista de sucursales</strong></li>
+            </ol>
+        </div>
+    </div><br>
+	
+	<div class="col-md-12">
+    	<div class="ibox float-e-margins">
+    		<div class="ibox-title"><h5>{{title}}</h5></div>
+    		<dvi class="ibox-tools"></dvi>
+    		<div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="table-responsive">
+	                        <table class="table table-condensed table-bordered table-striped">
+	                        <thead>
+	                            <tr>
+	                                <th>Empresa</th>
+	                                <th>Sucursal</th>
+	                                <th>Telefono</th>
+	                                <th>Direccion</th>
+	                                <th>Estado</th>
+	                                <th>Ver Reportes</th>
+	                            </tr>
+	                        </thead>
+	                        <tr>
+	                        	<td>
+	                        		<input type="text" ng-model="search.razonSocial" class="form-control" placeholder="">
+	                        	</td>
+	                        	<td>
+	                        		<input type="text" ng-model="search.nombre" class="form-control" placeholder="">
+	                        	</td>
+	                        	<td>
+	                        		<input type="text" ng-model="search.telefono" class="form-control" placeholder="">
+	                        	</td>
+	                        	<td>
+	                        		<input type="text" ng-model="search.direccion" class="form-control" placeholder="">
+	                        	</td>
+	                        	<td></td>
+	                        	<td></td>
+	                        </tr>
+	                        <tbody >
+	                        	<tr ng-repeat="sucursal in listasucursalempresa | filter:search | filter:paginate">
+	                        		<td>{{sucursal.razonSocial}}</td>
+		                            <td>{{sucursal.nombre}}</td>
+		                            <td>{{sucursal.telefono}}</td>
+		                            <td>{{sucursal.direccion}}</td>
+		                            <td>
+		                                <span ng-if="sucursal.estado == 'INACTIVO'" style="color: red">{{sucursal.estado}}
+		                                </span>
+		                                <span ng-if="sucursal.estado == 'ACTIVO'" style="color: green">{{sucursal.estado}}</span>
+		                            </td>
+		                            <td>
+		                                <center>
+		                                    <a href="#/reportes/reportesucursales/{{sucursal.id}}" title="Reportes">
+		                                        <i class="fa fa-bar-chart"></i>
+		                                    </a>
+		                                </center>
+		                            </td>
+	                        	</tr>
+	                        </tbody>
+	                        <tfoot>
+	                        <tr>
+	                            <th>Empresa</th>
+	                            <th>Sucursal</th>
+	                            <th>Telefono</th>
+	                            <th>Direccion</th>
+	                            <th>Estado</th>
+	                            <th>Ver Reportes</th>
+	                        </tr>
+	                        </tfoot>
+	                        </table>    
+	                        <pagination total-items="totalItems" ng-model="currentPage"  
+	                             max-size="10" boundary-links="true"  
+	                             items-per-page="numPerPage" class="pagination-sm"> 
+
+	                        </pagination> 
+	                    </div>
+                    </div>
+                </div>
+    		</div>
+    		<div class="ibox-footer" >
+    			
+    		</div>
+    	</div>
+    </div>
+
+</div>

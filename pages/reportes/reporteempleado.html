@@ -1,0 +1,94 @@
+<div ng-controller="reporteempleadoController">
+	
+	<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-10">
+            <h2>Reporte de empleado {{empleado.nombres}} {{empleado.apellidos}}</h2>
+            <ol class="breadcrumb">
+                <li><a href="#configuracion/index">Inicio</a></li>
+                <li><a href="#reportes/listaempleados">Lista Empleados</a></li>
+                <li class="active"><strong >Reporte de empleado</strong></li>
+            </ol>
+        </div>
+    </div><br>
+
+    <div class="row wrapper border-bottom white-bg page-heading">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group" style="margin-left: 10px">
+	                <label class="font-noraml">Fecha Incial</label><label class="font-noraml" style="padding-left: 160px">Fecha Incial</label>
+	                <div class="input-daterange input-group" id="datepicker">
+	                    <input type="date" class="input-sm form-control" name="start" />
+	                    <span class="input-group-addon">to</span>
+	                    <input type="date" class="input-sm form-control" name="end"  />
+	                </div>
+	            </div>
+			</div>
+			<div class="col-md-6">
+				<div style="margin-top: 20px">
+					<button class="btn btn-danger  dim " type="button" ng-click="buscar()">
+	            		<i class="fa fa-search"></i>
+	            	</button>
+				</div>
+			</div>
+		</div>
+	</div><br>
+
+    <div class="row">
+    	<div class="col-md-4"></div>
+        <div class="col-md-3" ng-if="decision == true">
+            <div class="ibox">
+                <div class="ibox-content product-box">
+
+                    <div class="product-imitation">
+                        <img src="./api{{contaempleado.logo}}" width="90px">
+                        <h4>{{contaempleado.cliente}}</h4>
+                        <h4>{{contaempleado.email}}</h4>
+                        <h4>{{contaempleado.telefono}}</h4>
+                    </div>
+                    <div class="product-desc">
+                        <span class="product-price" ng-if="contaempleado.total != null">Total:
+                            {{contaempleado.total | currency :"$ ":0}}
+                        </span>
+                        <span class="product-price" ng-if="contaempleado.total == null">Total:
+                            $0
+                        </span>
+                        <center><h3>{{contaempleado.razonSocial}}</h3></center>
+                        <center><h4>{{contaempleado.nombre}}</h4></center>
+                        <center><a href="" class="product-name">Turnos completados: {{contaempleado.termindaos}}</a></center>
+							
+                        <div class="small m-t-xs">
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-3" ng-if="decision == false">
+            <div class="ibox">
+                <div class="ibox-content product-box">
+					<center><h5>CONTABILIDAD DEL EMPLEADO</h5></center>
+                    <div class="product-imitation">
+                        <img src="./api{{empleado.logo}}" width="90px">
+                        <h4>{{empleado.nombres}} {{empleado.apellidos}}</h4>
+                        <h4>{{empleado.email}}</h4>
+                        <h4>{{empleado.telefono}}</h4>
+                    </div>
+                    <div class="product-desc">
+                        <span class="product-price">
+                            Total: $0
+                        </span>
+                        <h5> </h5>
+                        <a href="" class="product-name"></a>
+
+                        <div class="small m-t-xs">
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+	</div>
+
+</div>

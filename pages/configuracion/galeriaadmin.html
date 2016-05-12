@@ -1,0 +1,199 @@
+<div ng-controller="galeriaadminController">
+	<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-10">
+            <h2>Galeria</h2>
+            <ol class="breadcrumb">
+                <li><a href="#configuracion/index">Inicio</a></li>
+                <li class="active"><strong >Galeria</strong></li>
+                <li class="active"><a href=""><strong >Paso 7 de 7</strong></a></li>
+            </ol>
+        </div>
+    </div><br>
+
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-2">
+            
+        </div>
+        <div class="col-md-4">
+            <h5>Seleccione Empresa</h5>
+            <div class="input-group m-b">
+                <span class="input-group-addon"><i class="fa fa-hand-o-right"></i></span>
+                <select class="form-control" name="empresaid" ng-click="buscar()" ng-model="idempresa">
+                    <option ng-repeat="empresa in empresas" value="{{empresa.id}}" >      {{empresa.razonSocial}}
+                    </option>
+                </select>
+            </div>
+        </div>
+        <div ng-if="selecion == true">
+            <div class="col-md-4">
+                <h5>Seleccione Sucursal</h5>
+                <div class="input-group m-b">
+                    <span class="input-group-addon"><i class="fa fa-hand-o-right"></i></span>
+                    <select class="form-control" name="idsucu" ng-click="buscarsucu()" ng-model="nombre">
+                        <option ng-repeat="sucu in sucursal" value="{{sucu.id}}">
+                            {{sucu.nombre}}
+                        </option>
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div><br>
+
+	<div class="row animated fadeInRight" >
+		<div class="col-md-4">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>Galeria de imagenes</h5>
+				</div>
+				<div class="ibox-content no-padding border-left-right">
+					<span style="margin-left: 3%">
+						<div class="ibox-content no-padding border-left-right">
+							<div id="image1">
+                            <!--<img src="images/company.png" alt="image" class="img-circle">-->
+                        	</div>
+						</div>
+					</span>
+				</div>
+					
+				<div class="ibox-content profile-content" > 
+
+					<div class="row">
+						
+	                    <div class="" style="padding-left: 40%; margin-top: -2%">
+	                        <div class="input-group">
+	                            <span class="file-input btn btn-block btn-primary btn-file" >
+	                                <i class="fa fa-camera"></i>
+	                                <input id="files" type="file">
+	                            </span>
+	                        </div>
+	                    </div>
+                        <div >
+                            
+                        </div>
+	                    <center ><button type="button" ng-click="guardarfoto()" class="btn btn-primary ladda-button ladda-button-demo" data-style="zoom-in" id="cambiar" hidden style="display: none;">Guardar foto</button></center>
+                    
+    				</div><br>
+
+				</div>
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div class="row">
+				<div ng-repeat="imagen in galeria">
+                   <div class="file-box">
+                        <div class="file">
+                            <div class="ibox-content">
+                                <div class="lightBoxGallery">
+                                    <div class="image">
+                                        <a data-gallery="" title="{{imagen.nombre}}" href="/api/{{imagen.logo}}"><img alt="image" class="img-responsive" src="/api/{{imagen.logo}}"></a>
+                                    </div>
+                                    <div id="blueimp-gallery" class="blueimp-gallery">
+                                        <div class="slides"></div>
+                                        <h3 class="title"></h3>
+                                        <a class="prev">‹</a>
+                                        <a class="next">›</a>
+                                        <a class="close">×</a>
+                                        <ol class="indicator"></ol>
+                                    </div>
+                                </div>
+                                <div class="file-name">
+                                    <h4>{{imagen.nombre}}</h4> 
+                                    <small>{{imagen.fecha}}</small>
+                                    <a ng-click="deletegaleria(imagen.id)"><h5>Eliminar</h5></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+				</div>
+			</div>
+            
+		</div>
+
+	</div>
+
+</div>
+<script>
+
+
+	$(document).ready(function (){
+
+        // Bind normal buttons
+        $( '.ladda-button' ).ladda( 'bind', { timeout: 2000 } );
+
+        // Bind progress buttons and simulate loading progress
+        Ladda.bind( '.progress-demo .ladda-button',{
+            callback: function( instance ){
+                var progress = 0;
+                var interval = setInterval( function(){
+                    progress = Math.min( progress + Math.random() * 0.1, 1 );
+                    instance.setProgress( progress );
+
+                    if( progress === 1 ){
+                        instance.stop();
+                        clearInterval( interval );
+                    }
+                }, 500 );
+            }
+        });
+
+
+        var l = $( '.ladda-button-demo' ).ladda();
+
+        l.click(function(){
+            // Start loading
+            l.ladda( 'start' );
+
+            // Timeout example
+            // Do something in backend and then stop ladda
+            setTimeout(function(){
+                l.ladda('stop');
+            },12000)
+
+
+        });
+
+    });
+
+
+	function archivo(evt) {
+        var files = evt.target.files; // FileList object
+
+        //Obtenemos la imagen del campo "file". 
+        for (var i = 0, f; f = files[i]; i++) {
+            //Solo admitimos imágenes.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+
+            var reader = new FileReader();
+
+            reader.onload = (function(theFile) {
+                return function(e) {
+                    // Creamos la imagen.
+                    document.getElementById("image1").innerHTML = ['<center><img class="img-responsive" alt="User profile picture" id="img"  src="', e.target.result, '" title="', escape(theFile.name), '"/></center>'].join('');
+                };
+            })(f);
+            reader.readAsDataURL(f);
+        }
+    }
+    
+    document.getElementById('files').addEventListener('change', archivo, false);
+
+    $(':file').change(function(){
+        //obtenemos un array con los datos del archivo
+        var file = $("#files")[0].files[0];
+        //obtenemos el nombre del archivo
+        var fileName = file.name;
+        //obtenemos la extensión del archivo
+        //document.getElementById("nombreImagen").value=fileName;
+        fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
+        //obtenemos el tamaño del archivo
+        var fileSize = file.size;
+        //obtenemos el tipo de archivo image/png ejemplo
+        var fileType = file.type;
+        
+        $("#cambiar").show();
+        //mensaje con la información del archivo
+        // alert("<span class='info'>Archivo para subir: "+fileName+", peso total: "+fileSize+" bytes.</span>");
+    });
+</script>

@@ -1,0 +1,141 @@
+<script>
+    function soloNumeros(e){
+        var key = window.Event ? e.which : e.keyCode
+        return (key >= 48 && key <= 57)
+    }
+</script>
+<div ng-controller="registrarempresaController">
+	
+	<div class="text-center loginscreen animated fadeInDown">
+		<div class="row" style="margin-left: 5%">
+			<div class="animated bounceInRight">
+		        <center>
+		            <img src="images/turnomovil.png" style="height: 90px; width: 150px;margin-top: 40px">
+		        </center>
+		    </div><br>
+				
+		</div>
+		<div class="col-md-4"></div>
+		
+		<div class="col-md-5">
+			<div class="ibox float-e-margins">
+				<div class="ibox-content">
+				<center><h4>Registrar Empresas</h4></center>
+					<form >
+	    			<div class="row">
+	    				<div class="col-md-6">
+	    					<div class="input-group m-b">
+	    						<span class="input-group-addon"><i class="fa fa-info"></i></span>
+	    						<input type="text" class="form-control" placeholder="nit" name="nit" onKeyPress="return soloNumeros(event)">
+	    					</div>
+	    				</div>
+	    				<div class="col-md-6">
+	    					<div class="input-group m-b">
+	    						<span class="input-group-addon"><i class="fa fa-angellist"></i></span>
+	    						<input type="text" class="form-control" placeholder="Razon Social" name="razon">
+	    					</div>
+	    				</div>
+	    			</div>
+	    			<div class="row">
+	    				<div class="col-md-6">
+	    					<div class="input-group m-b">
+	    						<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+	    						<input type="text" class="form-control" placeholder="Correo de la empresa" name="email">
+	    					</div>
+	    				</div>
+	    				<div class="col-md-6">
+	    					<div class="input-group m-b">
+	    						<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+	    						<input type="text" class="form-control" placeholder="Telefono" name="celular" onKeyPress="return soloNumeros(event)">
+	    					</div>
+	    				</div>
+	    			</div>
+	    			<div class="row">
+	    				<div class="col-md-6">
+	    					<div class="input-group m-b">
+	    						<span class="input-group-addon"><i class="fa fa-user"></i></span>
+	    						<input type="text" class="form-control" placeholder="Contacto" name="contacto">
+	    					</div>
+	    				</div>
+	    			</div>
+	    			<center><h4>Registrar Administrador De La Empresa</h4></center>
+	    			<div class="row">
+	                    <div class="col-md-6">
+	                        <div class="input-group m-b">
+	                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+	                            <input type="text" class="form-control" placeholder="Nombre Admin" name="nombreadmin">
+	                        </div>
+	                    </div>
+	                    <div class="col-md-6">
+	                        <div class="input-group m-b">
+	                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+	                            <input type="text" class="form-control" placeholder="Apellido Admin" name="apellidoadmin">
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="row">
+	                    <div class="col-md-6">
+	                        <div class="input-group m-b">
+	                            <span class="input-group-addon"><i class="fa fa-info"></i></span>
+	                            <input type="text" class="form-control" placeholder="Identificación" name="idamin" onKeyPress="return soloNumeros(event)" maxlength="10" size="10">
+	                        </div>
+	                    </div>
+	                    <div class="col-md-6">
+	                        <div class="input-group m-b">
+	                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+	                            <input type="text" class="form-control" placeholder="Telefono" name="telefonoadmin" onKeyPress="return soloNumeros(event)" maxlength="10" size="10">
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="row">
+	                    <div class="col-md-6">
+	                        <div class="input-group m-b">
+	                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+	                            <input type="text" class="form-control" placeholder="Correo del admin" name="correo">
+	                        </div>
+	                    </div>
+	                    <div class="col-md-6">
+	                        <div class="input-group m-b">
+	                            <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
+	                            <input type="password" class="form-control" placeholder="Contraseña" name="passadmin">
+	                        </div>
+	                    </div>
+	                </div>
+	                <div class="row">
+	                    <div class="col-md-6">
+	                        <div class="input-group m-b">
+	                            <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
+	                            <input type="password" class="form-control" placeholder="Repita Contraseña" name="passadmin1">
+	                        </div>
+	                    </div>
+	                    <div class="col-md-6">
+	    					<div class="input-group m-b">
+	    						
+	    						<input type="hidden" class="form-control" placeholder="Promedio" name="promedio" value="0">
+	    					</div>
+	    				</div>
+	                </div>
+	                <center><h4>Lista de sectores al que se registra la empresa</h4></center>
+	                <div class="row">
+	                    <div ng-repeat="sectores in listaSector" class="checkbox">
+	                        <div class="col-md-4">
+	                            <label>
+	                                <input type="checkbox" name="sector" value="sectores.id" ng-click="agregarservicios(sectores,$event)"> {{sectores.nombre}}
+	                            </label>
+	                        </div>
+	                    </div> 
+	                </div>
+	                <div class="ibox-footer" >
+	                
+	                    <button ng-click="registrar()" type="button" class="btn btn-outline btn-primary dim">
+	                        <i class="fa fa-check"></i>
+	                    </button>
+	                
+	            	</div>
+		    	</form>
+				</div>
+			</div>
+		</div>
+
+
+</div>

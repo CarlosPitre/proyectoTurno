@@ -1,0 +1,351 @@
+<div ng-controller="blancoController">
+	
+	<div class="wrapper wrapper-content animated fadeInRight">
+		<div class="row" ng-if="empresa == true">
+			<div class="col-md-3" >
+				<a href="#configuracion/serviciosempresa" >
+					<div class="widget style1 navy-bg">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="fa fa-flask fa-5x">
+									
+								</div>
+							</div>
+							<div class="col-md-8 text-right">
+								<h3>Paso 1</h3>
+								<h4>Registrar Servicios</h4>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-md-3">
+				<a href="#configuracion/sucursal">
+					<div class="widget style1 lazur-bg">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="fa fa-diamond fa-5x">
+									
+								</div>
+							</div>
+							<div class="col-md-8 text-right">
+								<h3>Paso 2</h3>
+								<h4>Registrar Sucursales</h4>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-md-3">
+				<a href="#configuracion/empleadoempresa">
+					<div class="widget style1 yellow-bg">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="fa fa-users fa-5x">
+									
+								</div>
+							</div>
+							<div class="col-md-8 text-right">
+								<h3>Paso 3</h3>
+								<h4>Registrar Empleados</h4>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-md-3">
+				<a href="#reportes/listaempleados">
+					<div class="widget style1 red-bg">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="fa fa-bar-chart fa-5x">
+									
+								</div>
+							</div>
+							<div class="col-md-8 text-right">
+								<h3>Paso 4</h3>
+								<h4>Reportes</h4>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+
+		</div>
+
+		<!-- Super admin -->
+		<div class="row" ng-if="super == true">
+
+                        <div class="col-md-3" >
+				<a href="#configuracion/listasucursal" ng-click="activar()">
+					<div class="widget style1 red-bg">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="fa fa-th-large fa-5x">
+									
+								</div>
+							</div>
+							<div class="col-md-8 text-right">
+								<h3>Paso 0</h3>
+								<h4>Dasboard</h4>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			
+			<div class="col-md-3" >
+				<a href="#configuracion/sector" ng-click="activar()">
+					<div class="widget style1 navy-bg">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="fa fa-codepen fa-5x">
+									
+								</div>
+							</div>
+							<div class="col-md-8 text-right">
+								<h3>Paso 1</h3>
+								<h4>Registrar Sectores</h4>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-md-3" >
+				<a href="#configuracion/servicios">
+					<div class="widget style1 lazur-bg">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="fa fa-flask fa-5x">
+									
+								</div>
+							</div>
+							<div class="col-md-8 text-right">
+								<h3>Paso 2</h3>
+								<h4>Registrar Servicios</h4>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-md-3">
+				<a href="#configuracion/empresa">
+					<div class="widget style1 yellow-bg">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="fa fa-building-o fa-5x">
+									
+								</div>
+							</div>
+							<div class="col-md-8 text-right">
+								<h3>Paso 3</h3>
+								<h4>Registrar Empresas</h4>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-md-3">
+				<a href="#configuracion/sucursaladmin">
+					<div class="widget style1 red-bg">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="fa fa-diamond fa-5x">
+									
+								</div>
+							</div>
+							<div class="col-md-8 text-right">
+								<h3>Paso 4</h3>
+								<h4>Registrar Sucursales</h4>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-md-3">
+				<a href="#configuracion/empleadoadministrador">
+					<div class="widget style1 navy-bg">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="fa fa-users fa-5x">
+									
+								</div>
+							</div>
+							<div class="col-md-8 text-right">
+								<h3>Paso 5</h3>
+								<h4>Registrar Empleados</h4>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<div class="col-md-3">
+				<a href="#reportes/listaempresareporte">
+					<div class="widget style1 lazur-bg">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="fa fa-bar-chart fa-5x">
+									
+								</div>
+							</div>
+							<div class="col-md-8 text-right">
+								<h3>Paso 6</h3>
+								<h4>Reportes</h4>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+
+                        <div class="col-md-3">
+				<a href="#/configuracion/galeriaimagenes">
+					<div class="widget style1 yellow-bg">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="fa fa-picture-o fa-5x">
+									
+								</div>
+							</div>
+							<div class="col-md-8 text-right">
+								<h3>Paso 7</h3>
+								<h4>Galeria</h4>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+
+		</div>
+
+		<!-- sucursal -->
+		
+		<div class="row" ng-if="sucu == true">
+			<div class="col-md-3">
+				<a href="#configuracion/empleados">
+					<div class="widget style1 navy-bg">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="fa fa-users fa-5x">
+									
+								</div>
+							</div>
+							<div class="col-md-8 text-right">
+								<h3>Paso 1</h3>
+								<h4>Registrar Empleados</h4>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+			<div class="col-md-3">
+				<a href="#reportes/reportetotalempleado">
+					<div class="widget style1 lazur-bg">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="fa fa-bar-chart fa-5x">
+									
+								</div>
+							</div>
+							<div class="col-md-8 text-right">
+								<h3>Paso 2</h3>
+								<h4>Reportes</h4>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<span ng-if="aplicareserva == 'SI'">
+				<div class="col-md-3">
+					<a href="#/configuracion/reservas">
+						<div class="widget style1 yellow-bg">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="fa fa fa-bell fa-5x">
+										
+									</div>
+								</div>
+								<div class="col-md-8 text-right">
+									<h3>Paso 3</h3>
+									<h4>Reservas</h4>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>
+			</span>
+
+            <div class="col-md-3">
+				<a href="#/configuracion/galeriaimagenes">
+					<div class="widget style1 red-bg">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="fa fa-picture-o fa-5x">
+									
+								</div>
+							</div>
+							<div class="col-md-8 text-right">
+								<h3>Paso 4</h3>
+								<h4>Galeria</h4>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+
+			<span ng-if="aplicareserva == 'SI'">
+				<div class="col-md-3">
+					<a href="#/configuracion/calendario">
+						<div class="widget style1 navy-bg">
+							<div class="row">
+								<div class="col-md-4">
+									<div class="fa fa-calendar fa-5x">
+										
+									</div>
+								</div>
+								<div class="col-md-8 text-right">
+									<h3>Paso 5</h3>
+									<h4>Calendario</h4>
+								</div>
+							</div>
+						</div>
+					</a>
+				</div>	
+			</span>
+
+		</div>
+
+		<!-- Empleados-->
+
+		<div class="row" ng-if="empleado == true">
+			<div class="col-md-3"></div>
+			<div class="col-md-3">
+				<a href="#configuracion/turnos">
+					<div class="widget style1 lazur-bg">
+						<div class="row">
+							<div class="col-md-4">
+								<div class="fa fa-bell fa-5x">
+									
+								</div>
+							</div>
+							<div class="col-md-8 text-right">
+								<h3>Paso 1</h3>
+								<h4>Turnos</h4>
+							</div>
+						</div>
+					</div>
+				</a>
+			</div>
+		</div>
+
+	</div>
+
+</div>

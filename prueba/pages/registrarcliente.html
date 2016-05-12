@@ -1,0 +1,148 @@
+<div ng-controller="clienteController">
+	
+	<div class="text-center loginscreen animated fadeInDown">
+		<div class="row" style="margin-left: 5%">
+			<div class="animated bounceInRight">
+		        <center>
+		            <img src="images/turnomovil.png" style="height: 100px; width: 170px;margin-top: 40px">
+		        </center>
+		    </div><br>
+		</div>
+
+		<div class="col-md-4"></div>
+
+		<div class="col-md-5">
+			<div class="ibox float-e-margins">
+				<div class="ibox-content">
+					<h3>{{title}}</h3>
+				<form >
+	    			<div class="row">
+	    				<div class="col-md-6">
+	    					<div class="input-group m-b">
+	    						<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+	    						<input type="text" class="form-control" placeholder="Email" name="email">
+	    					</div>
+	    				</div>
+	    				<div class="col-md-6">
+	    					<div class="input-group m-b">
+	    						<span class="input-group-addon"><i class="fa fa-user"></i></span>
+	    						<input type="text" class="form-control" placeholder="Nombres" name="nombres">
+	    					</div>
+	    				</div>
+	    			</div>
+	    			<div class="row">
+	    				<div class="col-md-6">
+	    					<div class="input-group m-b">
+	    						<span class="input-group-addon"><i class="fa fa-user"></i></span>
+	    						<input type="text" class="form-control" placeholder="Apellidos" name="apellidos">
+	    					</div>
+	    				</div>
+	    				<div class="col-md-6">
+	    					<div class="input-group m-b">
+	    						<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+	    						<input type="number" class="form-control" data-mask="(999) 999-9999" placeholder="Telefono" name="celular">
+	    					</div>
+	    				</div>
+	    			</div>
+	    			<div class="row">
+	    				<div class="col-md-6">
+	                        <div class="input-group m-b">
+	                            <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
+	                            <input type="password" class="form-control" placeholder="Contraseña" name="passadmin">
+	                        </div>
+	                    </div>
+	                    <div class="col-md-6">
+	                        <div class="input-group m-b">
+	                            <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
+	                            <input type="password" class="form-control" placeholder="Repita Contraseña" name="passadmin1">
+	                        </div>
+	                    </div>
+	    				
+	    			</div>
+	    			
+	    			
+		    	</form>
+		    	<div class="ibox-footer" >
+	                <div>
+	                    <button ng-click="registrarse()" type="button" class="btn btn-w-m btn-success">Registrarse
+	                    </button>
+	                </div><br>
+	                <!--<div>
+	                	<a class="btn btn-success btn-facebook" id="facebookLogin">
+	                		<i class="fa fa-facebook"></i>
+	                		Iniciar Sesión con facebook
+	                	</a>
+	                </div>-->
+	            </div>
+				</div>
+			</div>
+		</div>
+
+		<!--<div class="col-md-4">
+			<div class="ibox-content">
+				<h3>{{title}}</h3>
+				<form >
+	    			<div class="row">
+	    				<div class="col-md-6">
+	    					<div class="input-group m-b">
+	    						<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+	    						<input type="text" class="form-control" placeholder="Email" name="email">
+	    					</div>
+	    				</div>
+	    				<div class="col-md-6">
+	    					<div class="input-group m-b">
+	    						<span class="input-group-addon"><i class="fa fa-user"></i></span>
+	    						<input type="text" class="form-control" placeholder="Nombres" name="nombres">
+	    					</div>
+	    				</div>
+	    			</div>
+	    			<div class="row">
+	    				<div class="col-md-6">
+	    					<div class="input-group m-b">
+	    						<span class="input-group-addon"><i class="fa fa-user"></i></span>
+	    						<input type="text" class="form-control" placeholder="Apellidos" name="apellidos">
+	    					</div>
+	    				</div>
+	    				<div class="col-md-6">
+	    					<div class="input-group m-b">
+	    						<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+	    						<input type="number" class="form-control" data-mask="(999) 999-9999" placeholder="Telefono" name="celular">
+	    					</div>
+	    				</div>
+	    			</div>
+	    			<div class="row">
+	    				<div class="col-md-6">
+	                        <div class="input-group m-b">
+	                            <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
+	                            <input type="password" class="form-control" placeholder="Contraseña" name="passadmin">
+	                        </div>
+	                    </div>
+	                    <div class="col-md-6">
+	                        <div class="input-group m-b">
+	                            <span class="input-group-addon"><i class="fa fa-unlock-alt"></i></span>
+	                            <input type="password" class="form-control" placeholder="Repita Contraseña" name="passadmin1">
+	                        </div>
+	                    </div>
+	    				
+	    			</div>
+	    			
+	    			
+		    	</form>
+		    	<div class="ibox-footer" >
+	                <div>
+	                    <button ng-click="registrarse()" type="button" class="btn btn-w-m btn-success">Registrarse
+	                    </button>
+	                </div><br>
+	                <div>
+	                	<a class="btn btn-success btn-facebook" id="facebookLogin">
+	                		<i class="fa fa-facebook"></i>
+	                		Iniciar Sesión con facebook
+	                	</a>
+	                </div>
+	            </div>
+			</div>
+		</div>-->
+
+		<div class="col-md-4"></div>
+
+</div>

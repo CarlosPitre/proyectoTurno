@@ -1,0 +1,66 @@
+<div ng-controller="calendarioController">
+	
+	<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-10">
+            <h2>Calendario</h2>
+            <ol class="breadcrumb">
+                <li><a href="#configuracion/index">Inicio</a></li>
+                <li class="active"><strong >Calendario</strong></li>
+            </ol>
+        </div>
+    </div><br>
+
+    <div class="col-lg-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title">
+                <h5></h5>
+            </div>
+            <div class="ibox-content">
+                <div id="calendar"></div>
+            </div>
+        </div>
+    </div>
+    <!--<button ng-click="mostrarFecha();">mostrar fecha</button>-->
+
+    <div class="modal inmodal" id="fullCalModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <i class="fa fa-laptop modal-icon"></i>
+                    <h4 class="modal-title">Datos del turno</h4>
+                    <small class="font-bold"></small>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Cliente: {{vercalendario[0].cliente}}</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>{{vercalendario[0].nombres}}</h4>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h4>Fecha: {{vercalendario[0].fechaReserva}}</h4>
+                        </div>
+                        <div class="col-md-6">
+                            <h4>H. Inicial: {{vercalendario[0].horaReserva}} H. Final: {{vercalendario[0].horaFinalReserva}}</h4>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-primary" ng-click="cancelarturnoagenda(vercalendario[0].id)">Cancelar Turno</button>
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<script>
+
+
+	
+</script>

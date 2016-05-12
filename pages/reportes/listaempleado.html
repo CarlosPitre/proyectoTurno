@@ -1,0 +1,90 @@
+<div ng-controller="listaempleadoController">
+	
+	<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-10">
+            <h2>Listas de empleados</h2>
+            <ol class="breadcrumb">
+                <li><a href="#configuracion/index">Inicio</a></li>
+                <li class="active"><strong >Lista de empleados</strong></li>
+            </ol>
+        </div>
+    </div><br>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+    	<div class="row">
+    		<div class="col-md-12">
+    			<div class="ibox float-e-margins">
+    				<div class="ibox-title">
+                        <h5>Tabla De Empleados Registradas</h5>
+                    </div>
+                    <div class="ibox-content">
+                    	<div class="table-responsive">
+                    		<table class="table table-condensed table-bordered table-striped">
+				                <thead>
+				                	<tr>
+				                		<th>Sucursales</th>
+				                		<th>Empleados</th>
+				                	</tr>
+				                </thead>
+				                <tbody>
+				                	<tr ng-repeat="lista in empresa | filter:paginate">
+				                		<td>{{lista.sucursal}}</td>
+				                		<td>
+				                			<table class="table table-condensed table-bordered table-striped">
+				                				<thead>
+				                					<td>Identificacion</td>
+				                					<td>Nombres</td>
+				                					<td>Apellidos</td>
+				                					<td>Estado</td>
+				                					<td>Reporte</td>
+				                				</thead>
+				                				<tr>
+				                					<td>
+						                        		<input type="text" ng-model="search.identificacion" class="form-control" placeholder="">
+						                        	</td>
+						                        	<td>
+						                        		<input type="text" ng-model="search.nombres" class="form-control" placeholder="">
+						                        	</td>
+						                        	<td>
+						                        		<input type="text" ng-model="search.apellidos" class="form-control" placeholder="">
+						                        	</td>
+						                        	<td></td>
+						                        	<td></td>
+				                				</tr>
+				                				<tbody>
+				                					<tr ng-repeat="empleado in lista.empleados | filter:search ">
+				                						<td>{{empleado.identificacion}}</td>
+				                						<td>{{empleado.nombres}}</td>
+				                						<td>{{empleado.apellidos}}</td>
+				                						<td>
+				                							<span ng-if="empleado.estado == 'INACTIVO'" style="color: red">{{empleado.estado}}</span>
+					                        				<span ng-if="empleado.estado == 'ACTIVO'" style="color: green">{{empleado.estado}}</span>
+				                						</td>
+				                						<td>
+				                							<center>
+							                                    <a href="#reportes/reporteempleado/{{empleado.id}}" title="Reportes">
+							                                        <i class="fa fa-bar-chart"></i>
+							                                    </a>
+							                                </center>
+				                						</td>
+				                					</tr>
+				                				</tbody>
+				                			</table>
+				                		</td>
+				                	</tr>
+				                </tbody>
+				                
+			                </table>	
+			                    <pagination total-items="totalItems" ng-model="currentPage"  
+						            max-size="10" boundary-links="true"  
+						            items-per-page="numPerPage" class="pagination-sm"> 
+						       	</pagination>
+						       	<br><br>
+                    	</div>
+                    </div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+
+</div>

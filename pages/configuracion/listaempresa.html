@@ -1,0 +1,292 @@
+<div ng-controller="listaempresaController">
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-md-10">
+			<h2>Empresas</h2>
+			<ol class="breadcrumb">
+				<li><a href="#configuracion/index">Inicio</a></li>
+				<li class="active"><strong >Lista de empresas</strong></li>
+			</ol>
+		</div>
+	</div>
+	<div class="wrapper wrapper-content animated fadeInRight">
+            <div class="row">
+                <div class="col-md-12">
+	                <div class="ibox float-e-margins">
+	                    <div class="ibox-title">
+	                        <h5>Lista De Tablas De Empresas Registradas</h5>
+	                    </div>
+	                    <div class="ibox-content">
+
+		                    <div class="table-responsive">
+			                    <table class="table table-condensed table-bordered table-striped">
+				                    <thead>
+					                    <tr>
+					                        <th>Logo</th>
+					                        <th>Nit</th>
+					                        <th>Razon Social</th>
+					                        <th>Email</th>
+					                        <th>Telefono</th>
+					                        <th>Contacto</th>
+					                        <th>Estado</th>
+					                        <th>Ajustes</th>
+					                        <th>Activar</th>
+					                    </tr>
+				                    </thead>
+				                    <tbody id="tabla">
+				                    	<tr>
+				                    		<td></td>
+				                    		<td><input type="text" ng-model="search.nit" class="form-control" placeholder=""></td>
+				                    		<td><input type="text" ng-model="search.razonSocial" class="form-control" placeholder=""></td>
+				                    		<td><input type="text" ng-model="search.email" class="form-control" placeholder=""></td>
+				                    		<td><input type="text" ng-model="search.telefono" class="form-control" placeholder=""></td>
+				                    		<td><input type="text" ng-model="search.contacto" class="form-control" placeholder=""></td>
+				                    		<td></td>
+				                    		<td></td>
+				                    		<td></td>
+				                    	</tr>
+				                    	<tr ng-repeat="listaempresa in Empresa | filter:search | filter:paginate">
+					                        <td ng-if="listaempresa.logo==null">
+					                        	<img src="./api/imagenes/Company.png" height="30px">
+					                        </td>
+					                        <td ng-if="listaempresa.logo!=null">
+					                        	<img src="./api/{{listaempresa.logo}}" height="30px">
+					                        </td>
+					                        <td>{{listaempresa.nit}}</td>
+					                        <td>{{listaempresa.razonSocial}}</td>
+					                        <td>{{listaempresa.email}}</td>
+					                        <td>{{listaempresa.telefono}}</td>
+					                        <td>{{listaempresa.contacto}}</td>
+					                        <td>
+					                        	<span ng-if="listaempresa.estado == 'INACTIVO'" style="color: red">{{listaempresa.estado}}</span>
+					                        	<span ng-if="listaempresa.estado == 'ACTIVO'" style="color: green">{{listaempresa.estado}}</span>
+					                        </td>
+					                        <td>
+					                        	<center>
+					                        		<a href="javascript:;" title="Editar" ng-click="get(listaempresa)">
+					                        			<i class="fa fa-pencil"></i>
+					                        		</a>
+					                        	</center>
+					                        </td>
+					                        <td>
+					                        	<center>
+					                        		<a ng-if="listaempresa.estado=='INACTIVO'" href="javascript:;" title="Activar empresa" ng-click="getestado(listaempresa)">
+						                        		<i class="fa fa-check"></i>
+						                        	</a>
+						                        	<a href="javascript:;" ng-if="listaempresa.estado=='ACTIVO'" title="Desactivar empresa" ng-click="getestadodesactivar(listaempresa)">
+						                        		<i class="fa fa-times"></i>
+						                        	</a>
+					                        	</center>
+					                        </td>
+					                    </tr>
+				                    </tbody>
+				                    <tfoot>
+				                    <tr>
+				                        <th>Logo</th>
+				                        <th>Nit</th>
+				                        <th>Razon Social</th>
+				                        <th>Email</th>
+				                        <th>Telefono</th>
+				                        <th>Contacto</th>
+				                        <th>Estado</th>
+				                        <th>Ajustes</th>
+				                        <th>Activar</th>
+				                    </tr>
+				                    </tfoot>
+			                    </table>	
+			                    <pagination total-items="totalItems" ng-model="currentPage"  
+						             max-size="10" boundary-links="true"  
+						             items-per-page="numPerPage" class="pagination-sm"> 
+
+						       	</pagination> 
+						       	<br><br>
+		                    </div>
+							<!-- Modal de para editar -->
+							
+							<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog">
+                                	<div class="modal-content animated bounceInRight">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <h4 class="modal-title">Actualizar Empresa</h4>
+                                            <div ng-if="empresa.logo != null">
+                                    			<img ng-src="../Apiturno/{{empresa.logo}}" height="30px">
+                                			</div>
+			                                <div ng-if="empresa.logo == null">
+			                                    <img src="../Apiturno/imagenes/Company.png" height="30px">
+			                                </div>
+                                            <small class="font-bold"></small>
+                                        </div>
+                                        <div class="modal-body">
+                                            <div class="row">
+                                            	<div class="col-md-6">
+							    					<div class="input-group m-b">
+							    						<span class="input-group-addon"><i class="fa fa-info"></i></span>
+							    						<input type="text" class="form-control" placeholder="Nit" name="nit" ng-model="empresa.nit">
+							    					</div>
+							    				</div>
+							    				<div class="col-md-6">
+							    					<div class="input-group m-b">
+							    						<span class="input-group-addon"><i class="fa fa-angellist"></i></span>
+							    						<input type="text" class="form-control" placeholder="Razon Social" name="razon" ng-model="empresa.razonSocial">
+							    					</div>
+							    				</div>
+                                            </div>
+                                            <div class="row">
+							    				<div class="col-md-6">
+							    					<div class="input-group m-b">
+							    						<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+							    						<input type="text" class="form-control" placeholder="Email" name="email" ng-model="empresa.email">
+							    					</div>
+							    				</div>
+							    				<div class="col-md-6">
+							    					<div class="input-group m-b">
+							    						<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+							    						<input type="text" class="form-control" placeholder="Celular" name="celular" ng-model="empresa.telefono">
+							    					</div>
+							    				</div>
+							    			</div>
+							    			<div class="row">
+							    				<div class="col-md-6">
+							    					<div class="input-group m-b">
+							    						<span class="input-group-addon"><i class="fa fa-user"></i></span>
+							    						<input type="text" class="form-control" placeholder="Contacto" name="contacto" ng-model="empresa.contacto">
+							    					</div>
+							    				</div>
+							    				<div class="col-md-6">
+							    					<div class="input-group m-b">
+							    						<span class="input-group-addon"><i class="fa fa-pie-chart"></i></span>
+							    						<input type="text" class="form-control" placeholder="Promedio" name="promedio" ng-model="empresa.promedio">
+							    					</div>
+							    				</div>
+							    			</div>
+
+							    			<div class="row">
+			                                    <div class="col-md-7">
+			                                        <span style="padding-left: 10px">
+			                                            <div id="image" style="width: 60%; height: 60px; top: 2em;margin-left: 4%;margin-top: -2%">
+			                                                <!--<img src="images/company.png" alt="image" class="img-circle">-->
+			                                            </div>
+			                                        </span>
+			                                    </div>
+			                                    <div class="col-md-5">
+			                                        <div class="col-md-5">
+			                                            <div class="" style="padding-left: 12%; margin-top: -2%">
+			                                                <div class="input-group">
+			                                                    <span class="file-input btn btn-block btn-primary btn-file" >
+			                                                        <i class="fa fa-camera"></i>
+			                                                        <input id="files" type="file">
+			                                                    </span>
+			                                                </div>
+			                                            </div>
+			                                        </div>
+			                                    </div>
+			                                </div>
+
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary" ng-click="modificar()">Actualizar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+							<!-- Modal de para Activar -->
+							<div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog">
+                                	<div class="modal-content animated bounceInRight">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <i class="fa fa-laptop modal-icon"></i>
+                                            <h4 class="modal-title">Activar Estado</h4>
+                                            <small class="font-bold"></small>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4><center>¿Activar estado de la empresa?</center></h4>
+                                            <h5><center></center></h5>
+                                            <input type="hidden" name="" ng-model="empresa.estado">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary" ng-click="modificarestado()">Activar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+								<!-- Modal de para desactivar -->
+                            <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal-dialog">
+                                	<div class="modal-content animated bounceInRight">
+                                        <div class="modal-header">
+                                            <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                            <i class="fa fa-laptop modal-icon"></i>
+                                            <h4 class="modal-title">Desactivar Estado</h4>
+                                            <small class="font-bold"></small>
+                                        </div>
+                                        <div class="modal-body">
+                                            <h4><center>¿Desactivar estado de la empresa?</center></h4>
+                                            <h5><center></center></h5>
+                                            <input type="hidden" name="" ng-model="empresa.estado">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                            <button type="button" class="btn btn-primary" ng-click="modificarestadodesactivar()">Desactivar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+	                    </div>
+	                </div>
+            	</div>
+            </div>
+            
+        </div>
+
+</div>
+
+<script>
+
+    function archivo(evt) {
+        var files = evt.target.files; // FileList object
+
+        //Obtenemos la imagen del campo "file". 
+        for (var i = 0, f; f = files[i]; i++) {
+            //Solo admitimos imágenes.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+
+            var reader = new FileReader();
+
+            reader.onload = (function(theFile) {
+                return function(e) {
+                    // Creamos la imagen.
+                    document.getElementById("image").innerHTML = ['<img class="profile-user-img img-responsive img-circle" alt="User profile picture" id="img" style="width: 30%" src="', e.target.result, '" title="', escape(theFile.name), '"/>'].join('');
+                };
+            })(f);
+            reader.readAsDataURL(f);
+        }
+    }
+    
+    document.getElementById('files').addEventListener('change', archivo, false);
+
+    $(':file').change(function(){
+        //obtenemos un array con los datos del archivo
+        var file = $("#files")[0].files[0];
+        //obtenemos el nombre del archivo
+        var fileName = file.name;
+        //obtenemos la extensión del archivo
+        //document.getElementById("nombreImagen").value=fileName;
+        fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
+        //obtenemos el tamaño del archivo
+        var fileSize = file.size;
+        //obtenemos el tipo de archivo image/png ejemplo
+        var fileType = file.type;
+        
+        $("#cambiar").show();
+        //mensaje con la información del archivo
+        // alert("<span class='info'>Archivo para subir: "+fileName+", peso total: "+fileSize+" bytes.</span>");
+    });
+
+</script>

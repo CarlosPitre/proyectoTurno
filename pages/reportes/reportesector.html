@@ -1,0 +1,110 @@
+<div ng-controller="reportesectorController">
+
+	<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-10">
+            <h2>Reporte de sectores </h2>
+            <ol class="breadcrumb">
+                <li><a href="#configuracion/index">Inicio</a></li>
+                <li class="active"><strong >Reporte de sectores</strong></li>
+            </ol>
+        </div>
+    </div><br>
+
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="row">
+			<div class="col-md-6">
+				<div class="form-group" style="margin-left: 10px">
+	                <label class="font-noraml">Fecha Incial</label><label class="font-noraml" style="padding-left: 160px">Fecha Incial</label>
+	                <div class="input-daterange input-group" id="datepicker">
+	                    <input type="date" class="input-sm form-control" name="start" />
+	                    <span class="input-group-addon">to</span>
+	                    <input type="date" class="input-sm form-control" name="end"  />
+	                </div>
+	            </div>
+			</div>
+			<div class="col-md-6">
+				<div style="margin-top: 20px">
+					<button class="btn btn-danger  dim " type="button" ng-click="buscar()">
+	            		<i class="fa fa-search"></i>
+	            	</button>
+				</div>
+			</div>
+		</div>
+	</div><br>
+
+	<div class="row animated fadeInRight">
+		<div class="col-md-4">
+				<div class="ibox float-e-margins">
+	    			<div class="ibox-title"><h5>Reporte de sectores por turnos terminados</h5></div>
+	    			<div class="ibox-tools"></div>
+		    		<div class="ibox-content">
+		    			<div ng-if="grafo==true">
+		    				<div id="chart"></div>	
+		    			</div>
+			            <div ng-if="grafo==false">
+			            	<center><h3>Seleccione fecha para grafico</h3></center>
+			            </div>
+		    		</div>
+		    		<div class="ibox-footer" >
+		    			<div class="row">
+	    					<div ng-repeat="valores in reporte">
+	    						<div class="col-md-5">
+	    							<h5 >N° Turno por {{valores.razonSocial}}: <strong >{{valores.sucursales}}</strong></h5>
+	    						</div>
+	    					</div>
+		    			</div>
+		    		</div>
+	    		</div>
+			</div>
+
+			<div class="col-md-8">
+				<div class="ibox float-e-margins">
+	    			<div class="ibox-title"><h5>Contabilidad del sector</h5> 
+	    				<div class="col-md-4"></div>
+	    				<div class="col-md-4"><h5>Total: {{totalempresa | currency :"$ ":0}}</h5></div>
+	    			</div>
+	    			<div class="ibox-tools"></div>
+		    		<div class="ibox-content">
+			           <div class="row">
+			           		<div class="table-responsive">
+			           			<table class="table table-condensed table-bordered table-striped">
+			           				<thead>
+					                    <tr>
+					                    	<th>Empresa</th>
+			                                <th>Sucursal</th>
+			                                <th>Fecha</th>
+			                                <th>Total</th>
+					                    </tr>
+				                    </thead>
+				                    <tbody id="tabla">
+				                    	<tr ng-repeat="conta in contabilidad">
+				                    		<td>{{conta.razonSocial}}</td>
+				                    		<td>{{conta.nombre}}</td>
+				                    		<td>{{conta.fecha}}</td>
+				                    		<td>{{conta.total}}</td>
+				                    	</tr>
+				                    </tbody>
+				                    <tfoot>
+					                    <tr>
+					                    	<th>Empresa</th>
+				                            <th>Sucursal</th>
+			                                <th>Fecha</th>
+			                                <th>Total</th>
+					                    </tr>
+
+					                </tfoot>
+
+			           			</table>
+			           		</div>
+			           </div> 
+		    		</div>
+		    		<div class="ibox-footer" >
+		    			<div class="col-md-7"></div>
+		    			<div class="col-md-4"><h4>Total : {{totalempresa | currency :"$ ":0}}</h4></div><br>
+		    		</div>
+	    		</div>
+			</div>
+
+	</div>
+	
+</div>

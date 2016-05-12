@@ -1,0 +1,157 @@
+<div ng-controller="listasucursalController">
+    
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-10">
+            <h2>Sucursales</h2>
+            <ol class="breadcrumb">
+                <li><a href="#configuracion/index">Inicio</a></li>
+                <li class="active"><strong >Lista de sucursales</strong></li>
+            </ol>
+        </div>
+    </div><br>
+
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="row">
+            <div class="col-md-5">
+                <h2>Consultar por departamentos</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-3">
+                <div class="input-group m-b">
+                    <span class="input-group-addon"><i class="fa fa-hand-o-right"></i></span>
+                    <select  class="form-control" data-live-search="true" name="departamento" ng-change="buscarmun()" ng-model="Sucursal.iddepartamento">
+                        <!--<option ng-repeat="departamento in departamentos" value="{{departamento.id}}">
+                            {{departamento.nombre}}
+                        </option>-->
+                    </select>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="input-group m-b">
+                    <span class="input-group-addon"><i class="fa fa-hand-o-right"></i></span>
+                    <select class="form-control" data-live-search="true" name="listamunicipios" ng-model="Sucursal.idmunicipio" ng-click="geocoder()">
+                        <!--<option ng-repeat="municipio in municipios" value="{{municipio.id}}">
+                            {{municipio.nombre}}
+                        </option>-->
+                    </select>
+                </div>
+            </div>
+        </div>
+    </div><br>
+
+	<div class="col-md-8">
+    	<div class="ibox float-e-margins">
+    		<div class="ibox-title"><h5>{{title}}</h5></div>
+    		<dvi class="ibox-tools"></dvi>
+    		<div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="map1" class="google-map"></div>
+                    </div>
+                </div>
+    		</div>
+    		<div class="ibox-footer" >
+    			
+    		</div>
+    	</div>
+    </div>
+
+    <div class="col-md-4">
+    	<div class="ibox float-e-margins">
+    		<div class="ibox-title"><h5>{{title1}}</h5></div>
+    		<dvi class="ibox-tools"></dvi>
+    		<div class="ibox-content">
+                <div class="row">
+                	<div class="table-responsive">
+	                    <table class="table table-condensed table-bordered table-striped">
+	                    <thead>
+		                    <tr>
+		                    	<th>Cheked</th>
+		                        <th>Nombre</th>
+		                    </tr>
+	                    </thead>
+	                    <tbody >
+	                    	<tr ng-repeat="sector in Sector | filter:paginate">
+	                    		<td><input type="checkbox" ng-click="empresasxsectores(sector,$event)" name="check"></td>
+	                    		<td>{{sector.nombre}}</td>
+	                    	</tr>
+	                    </tbody>
+	                    <tfoot>
+	                    <tr>
+	                    	<th>Cheked</th>
+	                        <th>Nombre</th>
+	                    </tr>
+	                    </tfoot>
+	                    </table>	
+	                    <pagination total-items="totalItems" ng-model="currentPage"  
+				             max-size="10" boundary-links="true"  
+				             items-per-page="numPerPage" class="pagination-sm"> 
+
+				       	</pagination> 
+		            </div>
+                </div>
+    		</div>
+    		<div class="ibox-footer" >
+    			
+    		</div>
+    	</div>
+    </div>
+
+    
+    <div class="col-md-12">
+        <div class="ibox float-e-margins">
+            <div class="ibox-title"><h5>{{title3}}</h5></div>
+            <dvi class="ibox-tools"></dvi>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Empresa</th>
+                                <th>Sucursal</th>
+                                <th>Telefono</th>
+                                <th>Direccion</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <tr ng-repeat="sucursal in listasucursales | filter:paginate1">
+                                <td>{{sucursal.razonSocial}}</td>
+                                <td>{{sucursal.nombre}}</td>
+                                <td>{{sucursal.telefono}}</td>
+                                <td>{{sucursal.direccion}}</td>
+                                <td>
+                                    <span ng-if="sucursal.estado == 'INACTIVO'" style="color: red">{{sucursal.estado}}
+                                    </span>
+                                    <span ng-if="sucursal.estado == 'ACTIVO'" style="color: green">{{sucursal.estado}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>Empresa</th>
+                            <th>Sucursal</th>
+                            <th>Telefono</th>
+                            <th>Direccion</th>
+                            <th>Estado</th>
+                        </tr>
+                        </tfoot>
+                        </table>    
+                        <pagination total-items="totalItems1" ng-model="currentPage1"  
+                             max-size="10" boundary-links="true"  
+                             items-per-page="numPerPage1" class="pagination-sm"> 
+
+                        </pagination> 
+                    </div>
+                </div>
+            </div>
+            <div class="ibox-footer" >
+                
+            </div>
+        </div>
+    </div>
+    
+</div>

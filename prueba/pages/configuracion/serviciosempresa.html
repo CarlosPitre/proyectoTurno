@@ -1,0 +1,104 @@
+<div ng-controller="serviciosempresaController">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-10">
+            <h2>Servicios</h2>
+            <ol class="breadcrumb">
+                <li><a href="#configuracion/index">Inicio</a></li>
+                <li class="active"><strong >Servicios</strong></li>
+                <li class="active"><a href="#configuracion/sucursal"><strong >Paso 1 de 3</strong></a></li>
+            </ol>
+        </div>
+    </div><br>
+	<div class="col-md-5">
+    	<div class="ibox float-e-margins">
+    		<div class="ibox-title"><h5>{{title}}</h5></div>
+    		<dvi class="ibox-tools"></dvi>
+    		<div class="ibox-content">
+                <div class="row">
+                	<div class="col-md-10">
+    					<div class="input-group m-b">
+    						<span class="input-group-addon"><i class="fa fa-keyboard-o"></i></span>
+    						<input type="text" class="form-control" placeholder="Nombre Servicio" name="nombreservicio">
+    					</div>
+    				</div>
+                </div>
+                <div class="row">
+                	<div class="col-md-10" >
+                                       <h5>Seleccione Sector</h5>
+    					<div class="input-group m-b">
+                                                <span class="input-group-addon"><i class="fa fa-hand-o-right"></i></span>  
+    						<select class="form-control" data-live-search="true" name="idsector" ng-model="idempresa" placeholder="Sectores">
+                                <option ng-repeat="sector in listasectores" value="{{sector.idSector}}">      {{sector.nombre}}
+                                </option>
+                            </select>
+    					</div>
+    				</div>
+                </div>
+                <div class="row">
+                	<div class="col-md-10">
+    					<div class="input-group m-b">
+    						<span class="input-group-addon"><i class="fa fa-clipboard"></i></span>
+    						<textarea class="form-control" name="descripcion" placeholder="Descripcion" rows="3"></textarea>
+    					</div>
+    				</div>
+                </div>
+    			
+    		</div>
+    		<div class="ibox-footer" >
+    			<div style="margin-left: 40%">
+    				<button ng-click="registrar()" type="button" class="btn btn-outline btn-primary dim">
+    					<i class="fa fa-check"></i>
+    				</button>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+
+    <div class="col-md-7">
+    	<div class="ibox float-e-margins">
+    		<div class="ibox-title"><h5>{{title1}}</h5></div>
+    		<dvi class="ibox-tools"></dvi>
+    		<div class="ibox-content">
+                <div class="row">
+                	<div class="table-responsive">
+	                    <table class="table table-condensed table-bordered table-striped">
+	                    <thead>
+		                    <tr>
+                                <th>Sector</th>
+		                        <th>Servicio</th>
+		                        <th>Descripcion</th>
+		                        <th>Estado</th>
+		                    </tr>
+	                    </thead>
+	                    <tbody ng-repeat="lista in listaserviciosector | filter:paginate">
+	                    	<tr ng-repeat="servis in lista.servicio">
+                                <td>{{servis.sector}}</td>
+                                <td>{{servis.nombre}}</td>
+                                <td>{{servis.descripcion}}</td>
+                                <td>{{servis.estado}}</td>
+	                    	</tr>
+	                    </tbody>
+	                    <tfoot>
+	                    <tr>
+                            <th>Sector</th>
+	                        <th>Servicio</th>
+	                        <th>Descripcion</th>
+	                        <th>Estado</th>
+	                    </tr>
+	                    </tfoot>
+	                    </table>	
+	                    <pagination total-items="totalItems" ng-model="currentPage"  
+                             max-size="10" boundary-links="true"  
+                             items-per-page="numPerPage" class="pagination-sm"> 
+
+                        </pagination>  
+		            </div>
+                </div>
+
+                
+    			
+    		</div>
+    		
+    	</div>
+    </div>
+</div>

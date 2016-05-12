@@ -1,0 +1,60 @@
+public_html/perrofabio/api/.htaccess: Suspicious(RewriteRule):
+ RewriteRule ^ index.php [QSA,L]
+
+public_html/perrofabio/api/vendor/slim/slim/example/.htaccess: Suspicious(RewriteRule):
+ RewriteRule ^ index.php [QSA,L]
+
+public_html/perrofabio/api/vendor/illuminate/database/Eloquent/Builder.php: Suspicious(passthru):
+     protected $passthru = [
+
+public_html/perrofabio/api/vendor/symfony/polyfill-mbstring/Mbstring.php: Suspicious(base64_decode):
+             $s = base64_decode($s);
+
+public_html/perrofabio/js/plugins/diff_match_patch/README.txt: Suspicious(hacker):
+   Non-Google hackers who wish to recompress the source can use:
+
+public_html/reporte.txt: Suspicious(passthru):
+ public_html/perrofabio/api/vendor/illuminate/database/Eloquent/Builder.php: Suspicious(passthru):
+
+public_html/api/.htaccess: Suspicious(RewriteRule):
+ RewriteRule ^ index.php [QSA,L]
+
+public_html/api/vendor/slim/slim/example/.htaccess: Suspicious(RewriteRule):
+ RewriteRule ^ index.php [QSA,L]
+
+public_html/api/vendor/illuminate/database/Eloquent/Builder.php: Suspicious(passthru):
+     protected $passthru = [
+
+public_html/api/vendor/symfony/polyfill-mbstring/Mbstring.php: Suspicious(base64_decode):
+             $s = base64_decode($s);
+
+public_html/js/plugins/diff_match_patch/README.txt: Suspicious(hacker):
+   Non-Google hackers who wish to recompress the source can use:
+
+public_html/ipa/getmxrr.php: Suspicious(getmxrr):
+  * getmxrr.php
+
+public_html/ipa/email_validation.php: Suspicious(getmxrr):
+ 	var $getmxrr="GetMXRR";
+
+public_html/ipa/lib/Zend/Validate/File/MimeType.php: Suspicious(@ini_get("safe_mode"):
+             } elseif (!(@ini_get("safe_mode") == 'On' || @ini_get("safe_mode") === 1)) {
+
+public_html/ipa/lib/Zend/Validate/EmailAddress.php: Suspicious(getmxrr):
+      * Whether MX checking via getmxrr is supported or not
+
+public_html/ipa/lib/Zend/Mail/Protocol/Pop3.php: Suspicious(fsockopen):
+         $this->_socket = @fsockopen($host, $port, $errno, $errstr, self::TIMEOUT_CONNECTION);
+
+public_html/ipa/lib/Zend/Mail/Protocol/Smtp/Auth/Crammd5.php: Suspicious(base64_decode):
+         $challenge = base64_decode($challenge);
+
+public_html/ipa/lib/Zend/Mail/Protocol/Smtp.php: Suspicious(EHLO):
+  * Minimum implementation according to RFC2821: EHLO, MAIL FROM, RCPT TO, DATA, RSET, NOOP, QUIT
+
+public_html/ipa/lib/Zend/Mail/Protocol/Imap.php: Suspicious(fsockopen):
+         $this->_socket = @fsockopen($host, $port, $errno, $errstr, self::TIMEOUT_CONNECTION);
+
+public_html/ipa/index.php: Suspicious(getmxrr):
+ 		include("getmxrr.php");
+

@@ -1,0 +1,84 @@
+<div ng-controller="listasucursalempresaController">
+	
+	<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-10">
+            <h2>Sucursales</h2>
+            <ol class="breadcrumb">
+                <li><a href="#configuracion/index">Inicio</a></li>
+                <li class="active"><strong >Lista de sucursales</strong></li>
+            </ol>
+        </div>
+    </div><br>
+
+    <div class="col-md-12">
+    	<div class="ibox float-e-margins">
+    		<div class="ibox-title"><h5>{{title}}</h5></div>
+    		<dvi class="ibox-tools"></dvi>
+    		<div class="ibox-content">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div id="map1" class="google-map"></div>
+                    </div>
+                </div>
+    		</div>
+    		<div class="ibox-footer" >
+    			
+    		</div>
+    	</div>
+    </div>
+
+    <div class="col-md-12" >
+        <div class="ibox float-e-margins">
+            <div class="ibox-title"><h5>{{title2}}</h5></div>
+            <dvi class="ibox-tools"></dvi>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-bordered table-striped">
+                        <thead>
+                            <tr>
+                                <th>Empresa</th>
+                                <th>Sucursal</th>
+                                <th>Telefono</th>
+                                <th>Direccion</th>
+                                <th>Estado</th>
+                            </tr>
+                        </thead>
+                        <tbody >
+                            <tr ng-repeat="sucursalempresa in listasucursalempresa | filter:paginate">
+                            	<td>{{sucursalempresa.razonSocial}}</td>
+                            	<td>{{sucursalempresa.nombre}}</td>
+                                <td>{{sucursalempresa.telefono}}</td>
+                                <td>{{sucursalempresa.direccion}}</td>
+                                <td>
+                                    <span ng-if="sucursalempresa.estado == 'INACTIVO'" style="color: red">{{sucursalempresa.estado}}
+                                    </span>
+                                    <span ng-if="sucursalempresa.estado == 'ACTIVO'" style="color: green">{{sucursalempresa.estado}}</span>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                        <tr>
+                            <th>Empresa</th>
+                            <th>Sucursal</th>
+                            <th>Telefono</th>
+                            <th>Direccion</th>
+                            <th>Estado</th>
+                        </tr>
+                        </tfoot>
+                        </table>    
+                        <pagination total-items="totalItems" ng-model="currentPage"  
+                             max-size="10" boundary-links="true"  
+                             items-per-page="numPerPage" class="pagination-sm"> 
+
+                        </pagination>
+                    </div>
+                </div>
+            </div>
+            <div class="ibox-footer" >
+                
+            </div>
+        </div>
+    </div>
+
+</div>

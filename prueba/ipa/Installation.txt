@@ -1,0 +1,56 @@
+==================================================
+Installation of DANGEROUS MAILER - CLONED VERSION
+==================================================
+
+1 Simply upload the folder "m"
+into your webhost and open it in the browser.
+
+
+2 Change the permissions of following folder to 777
+
+folder /m
+folder /m/storage
+
+
+3 Open yourdomain.com/m in a browser.
+
+
+4 You will be asked to enter the username/password.
+Please use the default credentials as listed below
+
+username:  admin
+password:  admin
+
+
+
+Best Regards
+
+My Father 
+UnderPricedhost.com
+underpricedhost@gmail.com
+
+
+==================================================
+Paid Installation - $4
+==================================================
+
+If you want us to install the MAILER on your
+server/host simply send $4 by PAYPAL to underpri@underpricedhost.com
+and send the below email to underpricedhost@gmail.com
+
+
+Subject - $4 Paid
+Body - 
+
+Please install DANGEROUS MAILER on my server/webhost.
+I just paid you $4.
+
+My server details are -
+
+Yourdomainname
+Cpanel username
+Cpanel Password
+
+
+
+==================================================

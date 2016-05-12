@@ -1,0 +1,198 @@
+<div ng-controller="recurrenteController">
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-md-10">
+			<h2>Reservas recurrentes</h2>
+			<ol class="breadcrumb">
+				<li><a href="#configuracion/index">Inicio</a></li>
+				<li class="active"><strong >Reservas recurrentes</strong></li>
+			</ol>
+		</div>
+	</div><br>
+
+	<div class="row">
+		<div class="col-md-12">
+			<div class="ibox ">
+				<div class="ibox-title">
+                    <center><h5>Seleccione la fecha y hora para el turnos recurrente</h5></center>
+                </div>
+                <div class="ibox-content">	
+
+                	<div class="row">
+						
+						<div class="col-md-3">
+                    		<label>Seleccione la fecha de reserva</label>
+                    		<div class="input-group date">
+                    			<span class="input-group-addon"><i class="fa fa-calendar"></i>
+                                </span>
+                                <input type="date" name="fecha" class="form-control" value="{{date | date:'yyyy-MM-dd'}}">
+                            </div>
+                    	</div>
+
+						<div class="col-md-3">
+                    		<label>Seleccione el servicio</label>
+                    		<select name="servicios" class="form-control" ng-click="" >
+                    			<option ng-repeat="servi in listaserviciosucursal" value="{{servi.idServicio}}">{{servi.servicio}}</option>
+                    		</select>
+                    	</div>
+
+                    	<div class="col-md-3">
+                    		<label>Seleccione la hora para la reserva</label>
+                    		<div class="input-group">
+                                <!--<input type="text" class="form-control" value="09:00" name="hora">-->
+                                <span class="input-group-addon"><i class="fa fa-clock-o"></i></span>
+                                <ng-timepicker id="valor" ng-model="tiempo.minutos" init-time="{{tiempo.minutos}}" theme="red" step="60" ng-value="{{tiempo.minutos}}"></ng-timepicker>
+                            </div>
+                    	</div><br>
+                    	<div class="col-md-3">
+                    		<button type="button" class="btn btn-primary" ng-click="getempleadosdisponibles()">Buscar Disponibles</button>
+                    	</div>
+
+					</div><br><br>
+					
+	            </div>
+    
+                <div ng-repeat="reservar in reserva">
+                    <div class="ibox-content inspinia-timeline">
+                        <div class="timeline-item">
+                            <div class="row">
+                                <div class="col-xs-3 date">
+                                    <i class="fa fa fa-bell"></i>{{fecha}}
+                                    <br/>
+                                    <small class="text-navy">{{hora}}</small>
+                                </div>
+                                <div class="col-xs-7 content no-top-border">
+                                    <p class="m-b-xs"><strong>{{reservar.nombres}} {{reservar.apellidos}}</strong></p>
+
+                                    <p>Telefono: {{reservar.telefono}}</p>
+
+                                    <p><span data-diameter="40" class="updating-chart">Email: {{reservar.email}}</span></p>
+                                    <button type="button" class="btn btn-primary" ng-click="modal(reservar)">Reservar</button>
+                                    <!--<button type="button" class="btn btn-primary" ng-click="postreservar(reservar)">Reservar</button>-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content animated bounceInRight">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <h3><center>Desea Hacer la reserva de recurrente de este servicio?</center></h3>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                                <button type="button" class="btn btn-primary" ng-click="modalbuscar()">Aceptar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal inmodal lg" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content animated bounceInRight">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <center><h3>SELECCIONE EL CLIENTE</h3></center>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row">
+                                    
+                                    <div class="col-md-8">
+                                        <div class="input-group m-b">
+                                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                            <input type="text" maxlength="10" size="10" class="form-control" placeholder="Busqueda" ng-model = "filtro">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <a href="javascript:;" class="btn btn-primary" ng-click="buscarcliente()">{{title}}</a>
+                                    </div>
+                                </div>
+                               <div class = "row">
+                                    <div class="col-md-6">
+                                    <label>Seleccione los meses alquilar</label>
+                                            <select name="meses" class="form-control" ng-click="" >
+                                                <option ng-repeat="mes in meses" value="{{mes.id}}">{{mes.value}}</option>
+                                            </select>
+                                    </div>
+
+                                    <div class="col-md-6">
+                                    <label>Seleccione el rango</label>
+                                            <select name="rango" class="form-control" ng-click="" >
+                                                <option value="1">Diario</option>
+                                                <option value="2">Semanal</option>
+                                                <option value="3">Mensual</option>
+                                            </select>
+                                    </div>
+                                    
+                               </div>
+                               <br>
+                               <div class = "row">
+                               <div ng-show = "open">
+																	<div class="table-responsive">
+																		<table class="table table-condensed table-bordered table-striped" ng-table="tableParams" class="table table-hover" show-filter="true">
+																			<tr ng-repeat="cliente in misClientes| filter : filtro">
+																				<td title="'Email'">{{cliente.email}}</td>
+																				<td title="'Nombre'">{{cliente.nombres}}</td>
+																				<td title="'Apellidos'">{{cliente.apellidos}}</td>
+																				<td title="'Telefono'">{{cliente.telefono}}</td>
+																				<td>
+																					<button type="button" class="btn btn-primary" ng-click="postreservar(cliente.id)">Aceptar</button>
+																				</td>
+																			</tr>
+																		</table>
+																	</div>
+																</div>
+																<div ng-hide = "open">
+																	<div class="row">
+																		<div class="col-md-6">
+																			<div class="input-group m-b">
+																				<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+																				<input type="text" class="form-control" placeholder="Email" name="email">
+																			</div>
+																		</div>
+																		<div class="col-md-6">
+																			<div class="input-group m-b">
+																				<span class="input-group-addon"><i class="fa fa-user"></i></span>
+																				<input type="text" class="form-control" placeholder="Nombres" name="nombres">
+																			</div>
+																		</div>
+																	</div>
+																	<div class="row">
+																		<div class="col-md-6">
+																		<div class="input-group m-b">
+																		<span class="input-group-addon"><i class="fa fa-user"></i></span>
+																		<input type="text" class="form-control" placeholder="Apellidos" name="apellidos">
+																		</div>
+																		</div>
+																		<div class="col-md-6">
+																		<div class="input-group m-b">
+																		<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+																		<input type="number" placeholder="Telefono" class="form-control" name="celular">
+																		</div>
+																		</div>
+																	</div>
+																	
+																	<div>
+																		<button ng-click="registrarse()" type="button" class="btn btn-w-m btn-success">Registrar Cliente
+																		</button>
+																	</div>
+																</div>
+                               </div>
+                               
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                          
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+			</div>
+		</div>
+	</div>
+
+</div>

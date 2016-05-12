@@ -1,0 +1,97 @@
+<div ng-controller="listaempresareporteController">
+	
+	<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-10">
+            <h2>Listas de empresas</h2>
+            <ol class="breadcrumb">
+                <li><a href="#configuracion/index">Inicio</a></li>
+                <li class="active"><strong >Lista de Empresas</strong></li>
+            </ol>
+        </div>
+    </div><br>
+
+    <div class="wrapper wrapper-content animated fadeInRight">
+    	<div class="row">
+    		<div class="col-md-12">
+    			<div class="ibox float-e-margins">
+    				<div class="ibox-title">
+                        <h5>Lista De Tablas De Empresas Registradas</h5>
+                    </div>
+                    <div class="ibox-content">
+                    	<div class="table-responsive">
+                    		<table class="table table-condensed table-bordered table-striped">
+				                    <thead>
+					                    <tr>
+					                        <th>Logo</th>
+					                        <th>Nit</th>
+					                        <th>Razon Social</th>
+					                        <th>Email</th>
+					                        <th>Telefono</th>
+					                        <th>Contacto</th>
+					                        <th>Estado</th>
+					                        <th>Reporte</th>
+					                    </tr>
+				                    </thead>
+				                    <tbody id="tabla">
+				                    	<tr>
+				                    		<td></td>
+				                    		<td><input type="text" ng-model="search.nit" class="form-control" placeholder=""></td>
+				                    		<td><input type="text" ng-model="search.razonSocial" class="form-control" placeholder=""></td>
+				                    		<td><input type="text" ng-model="search.email" class="form-control" placeholder=""></td>
+				                    		<td><input type="text" ng-model="search.telefono" class="form-control" placeholder=""></td>
+				                    		<td><input type="text" ng-model="search.contacto" class="form-control" placeholder=""></td>
+				                    		<td></td>
+				                    		<td></td>
+				                    	</tr>
+				                    	<tr ng-repeat="listaempresa in Empresa | filter:search | filter:paginate">
+					                        <td ng-if="listaempresa.logo==null">
+					                        	<img src="./api/imagenes/Company.png" height="30px">
+					                        </td>
+					                        <td ng-if="listaempresa.logo!=null">
+					                        	<img src="./api/{{listaempresa.logo}}" height="30px">
+					                        </td>
+					                        <td>{{listaempresa.nit}}</td>
+					                        <td>{{listaempresa.razonSocial}}</td>
+					                        <td>{{listaempresa.email}}</td>
+					                        <td>{{listaempresa.telefono}}</td>
+					                        <td>{{listaempresa.contacto}}</td>
+					                        <td>
+					                        	<span ng-if="listaempresa.estado == 'INACTIVO'" style="color: red">{{listaempresa.estado}}</span>
+					                        	<span ng-if="listaempresa.estado == 'ACTIVO'" style="color: green">{{listaempresa.estado}}</span>
+					                        </td>
+					                        <td>
+					                        	<center>
+				                                    <a href="#/reportes/reporteempresas/{{listaempresa.id}}" title="Reportes">
+				                                        <i class="fa fa-bar-chart"></i>
+				                                    </a>
+				                                </center>
+					                        </td>
+					                    </tr>
+				                    </tbody>
+				                    <tfoot>
+				                    <tr>
+				                        <th>Logo</th>
+				                        <th>Nit</th>
+				                        <th>Razon Social</th>
+				                        <th>Email</th>
+				                        <th>Telefono</th>
+				                        <th>Contacto</th>
+				                        <th>Estado</th>
+				                        <th>Reporte</th>
+				                    </tr>
+				                    </tfoot>
+			                    </table>	
+			                    <pagination total-items="totalItems" ng-model="currentPage"  
+						             max-size="10" boundary-links="true"  
+						             items-per-page="numPerPage" class="pagination-sm"> 
+
+						       	</pagination> 
+						       	<br><br>
+                    	</div>
+                    </div>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+
+</div>

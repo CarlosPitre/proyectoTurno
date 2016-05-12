@@ -1,0 +1,219 @@
+<script>
+    function soloNumeros(e){
+        var key = window.Event ? e.which : e.keyCode
+        return (key >= 48 && key <= 57)
+    }
+</script>
+<div ng-controller="empleadoadminController">
+	
+	<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-10">
+            <h2>Empleados</h2>
+            <ol class="breadcrumb">
+                <li><a href="#configuracion/index">Inicio</a></li>
+                <li class="active"><strong >Empleados</strong></li>
+                <li class="active"><strong >Paso 5 de 5</strong></li>
+            </ol>
+        </div>
+    </div><br>
+	<div class="col-md-12">
+    	<div class="ibox float-e-margins">
+    		<div class="ibox-title"><h5>Registrar Empleados</h5></div>
+    		<dvi class="ibox-tools"></dvi>
+    		<div class="ibox-content">
+
+                <div class="row">
+                    <div class="col-md-5" >
+                        <h5>Seleccione Empresa</h5>
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-hand-o-right"></i></span> 
+                            <select  class="form-control" name="empresaid" ng-click="buscar()" ng-model="idempresa">
+                                <option ng-repeat="empresa in empresas" value="{{empresa.id}}" >      {{empresa.razonSocial}}
+                                </option>
+                            </select>
+                        </div>
+                    </div>
+                    <div ng-if="selecion == true">
+                        <div class="col-md-5">
+                            <h5>Seleccione Sucursal</h5>
+                            <div class="input-group m-b">
+                                <span class="input-group-addon"><i class="fa fa-hand-o-right"></i></span>
+                                <select class="form-control" name="idsucu" ng-click="buscarsucu()">
+                                    <option ng-repeat="sucu in sucursal" value="{{sucu.id}}">
+                                        {{sucu.nombre}}
+                                    </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div ng-if="selecion2 == true">
+                        <div class="col-md-5">
+                            <h5>Seleccione Sucursal</h5>
+                            <div class="input-group m-b">
+                                <span class="input-group-addon"><i class="fa fa-hand-o-right"></i></span>
+                                <select class="form-control" name="idsucu2">
+                                
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row">
+                	<div class="col-md-5">
+    					<div class="input-group m-b">
+    						<span class="input-group-addon"><i class="fa fa-info"></i></span>
+    						<input type="text" maxlength="10" size="10" class="form-control" placeholder="Identificación" name="identificacion" onKeyPress="return soloNumeros(event)">
+    					</div>
+    				</div>
+                    <div class="col-md-5">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input type="text" class="form-control" placeholder="Nombres" name="nombres">
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                            <input type="text" class="form-control" placeholder="Apellidos" name="apellidos">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+                            <input type="text" maxlength="10" size="10" class="form-control" placeholder="Telefono" name="telefono" onKeyPress="return soloNumeros(event)">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                            <input type="text" class="form-control" placeholder="Email" name="email">
+                        </div>
+                    </div>
+                    
+                </div>
+
+                <div class="row">
+                    <div class="col-md-5">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                            <input type="password" class="form-control" placeholder="Contraseña" name="contrasena">
+                        </div>
+                    </div>
+                    <div class="col-md-5">
+                        <div class="input-group m-b">
+                            <span class="input-group-addon"><i class="fa fa-key"></i></span>
+                            <input type="password" class="form-control" placeholder="Repetir Contraseña" name="contrasena1">
+                        </div>
+                    </div>
+                </div>
+                
+                <!--<div class="row">
+                    <div class="col-md-6">
+                        <h4>Registrar Servicios</h4>
+                    </div>
+                </div>-->
+
+                <div class="row">
+                    <div class="col-md-6">
+                        <h4>Lista de servicios</h4>
+
+                        <div ng-if="verdad == false">
+                            <div class="checkbox">
+                                <div>
+                                    <form id="items"></form>
+                                </div>
+                            </div>
+                            
+                        </div>
+                
+                        <div class="checkbox" ng-if="verdad == true">
+                            <form id="idservis">
+                                
+                            </form>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!--<div class="row">
+                    <div ng-repeat="servis in servicios" class="checkbox">
+                        <div ng-repeat="parametros in servis">
+                            <div class="col-xs-6">
+                                <label>
+                                    <input type="checkbox" name="servisucur" value="parametros.idServicio" ng-click="agregarservicios(servis,$event)"> {{parametros.nombre}}
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                </div>-->
+
+                <!--<div class="row" ng-if="verdad == true"> 
+                    <div class="checkbox">
+                        <div>
+                            <form id="items"></form>
+                        </div>
+                    </div>
+                </div>-->
+
+    		</div>
+
+    		<div class="ibox-footer" >
+    			<div style="margin-left: 40%" ng-if="boton == false">
+    				<button ng-click="registrarempleado()" type="button" class="btn btn-outline btn-primary dim">
+    					<i class="fa fa-check"></i>
+    				</button>
+    			</div>
+	    		<div style="margin-left: 40%" ng-if="boton == true">
+                    <button ng-click="putEmpleado()" type="button" class="btn btn-outline btn-primary dim">
+                        <i class="fa fa-check"></i>
+                    </button>
+                    <button type="button" class="btn btn-w-m btn-success" ng-click="nuevoempleado()">
+                        Nuevo Empleado
+                    </button>
+                </div>
+	            <!--<div class="ibox-footer" ng-if="verdad == true">
+	                <div style="margin-left: 40%">
+	                    <button ng-click="putEmpleado()" type="button" class="btn btn-outline btn-primary dim">
+	                        <i class="fa fa-check"></i>
+	                    </button>
+	                </div>
+	            </div>-->
+    		</div>
+    </div>
+
+    <div class="col-md-12" >
+        <div class="ibox float-e-margins">
+            <div class="ibox-title"><h5>Lista De Empleados Activos</h5></div>
+            <dvi class="ibox-tools"></dvi>
+            <div class="ibox-content">
+                <div class="row">
+                    <div class="table-responsive">
+                        <table class="table table-condensed table-bordered table-striped" ng-table="tableParams" show-filter="true">
+                            <tr ng-repeat="empleado in $data">
+                                <td title="'Identificacion'" filter="{ 'identificacion': 'text'}">{{empleado.identificacion}}</td>
+                                <td title="'Nombres'" filter="{ 'nombres': 'text'}">{{empleado.nombres}}</td>
+                                <td title="'Apellidos'" filter="{ 'apellidos': 'text'}">{{empleado.apellidos}}</td>
+                                <td title="'Telefono'" filter="{ 'telefono': 'text'}">{{empleado.telefono}}</td>
+                                <td title="'Sucursal'" filter="{ 'sucursal': 'text'}">{{empleado.sucursal}}</td>
+                                <td title="'Ajuste'">
+                                    <center ng-if="empleado.estado=='ACTIVO'">
+                                        <a href="javascript:;" title="Editar" ng-click="get(empleado)">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    </center>
+                                </td>
+                            </tr>
+                        </table> 
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

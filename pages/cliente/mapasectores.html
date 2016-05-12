@@ -1,0 +1,77 @@
+<div ng-controller="mapasectoresController">
+	
+	<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-10">
+            <h2>Sucursales mas cercanas</h2>
+            <ol class="breadcrumb">
+                <li><a href="#cliente/listasectorescliente">Inicio</a></li>
+                <li class="active"><strong >Lista de sucursales</strong></li>
+            </ol>
+        </div>
+    </div><br>
+
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-5" style="margin-left: 30%; padding-top: 5px">
+            <center><h4>Lista de servicios</h4></center>
+            <center>
+                <div class="input-group m-b">
+                    <select class="form-control" data-live-search="true" name="idsector" ng-model="idempresa" placeholder="Sectores" ng-change="buscarservicios()">
+                        <option ng-repeat="servis in servicios" value="{{servis.id}}">
+                            {{servis.nombre}}
+                        </option>
+                    </select>
+                </div>
+            </center>
+        </div>
+    </div><br>
+
+	<div class="row">
+        <div class="col-md-12">
+            <div class="ibox " style="height: 500px">
+                <div class="ibox-title">
+                    <h5>Mapa de sucursales activas</h5>
+                </div>
+                <div class="ibox-content">
+                    <div class="google-map" id="mapa"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content animated bounceInRight">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <i class="fa fa-laptop modal-icon"></i>
+                    <h4 class="modal-title">{{sucursal}}</h4>
+                    <small class="font-bold"></small>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div ng-repeat="empleado in Empleadosucursal">
+                            <div class="col-md-4">
+                                <ul class="list-group">
+                                    <form id="form">
+                                        <li class="list-group-item">
+                                            <input type="hidden" value="{{idSucursalempresa}}" name="idsucursal">
+                                            <h4>{{empleado.empleado}}</h4>
+                                            <select name="numcupos{{$index+1}}" class="form-control" ng-click="valor($index+1)"></select>
+                                            
+                                            <h5>{{empleado.servicio}}</h5><span class="label label-default label-pill pull-xs-right">{{empleado.numeroTurno}}</span><br><br>
+                                            <button type="button" class="btn btn-primary" ng-click="pedirTurno(empleado)">Confirmar Turno</button>
+                                        </li>
+                                    </form>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

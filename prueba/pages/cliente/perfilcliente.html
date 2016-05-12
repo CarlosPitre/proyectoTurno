@@ -1,0 +1,148 @@
+<div ng-controller="perfilclienteController">
+	
+	<div class="row wrapper border-bottom white-bg page-heading">
+		<div class="col-xs-10">
+			<h2>Perfil</h2>
+			<ol class="breadcrumb">
+				<li><a href="#configuracion/index">Inicio</a></li>
+				<li class="active"><strong >Perfil cliente</strong></li>
+			</ol>
+		</div>
+	</div><br>
+	
+	<div class="row animated fadeInRight">
+		<div class="col-md-4">
+			<div class="ibox float-e-margins">
+				<div class="ibox-title">
+					<h5>Detalles del perfil</h5>
+				</div>
+				<div class="ibox-content no-padding border-left-right">
+					<span style="margin-left: 3%">
+						<div class="ibox-content no-padding border-left-right">
+							<div id="image">
+                            <!--<img src="images/company.png" alt="image" class="img-circle">-->
+                        	</div>
+						</div>
+					</span>
+				</div>
+					
+				<div class="ibox-content profile-content">
+
+					<div class="row">
+						
+	                    <div class="" style="padding-left: 12%; margin-top: -2%">
+	                        <div class="input-group">
+	                            <span class="file-input btn btn-block btn-primary btn-file" >
+	                                <i class="fa fa-camera"></i>
+	                                <input id="files" type="file">
+	                            </span>
+	                        </div>
+	                    </div>
+
+	                    <button type="button" ng-click="guardarfoto()" class="btn btn-primary" id="cambiar" hidden style="display: none;">Cambiar foto</button>
+                    
+    				</div><br>
+
+					<h3>{{perfil.nombres}} {{perfil.apellidos}}</h3>
+					<h4>{{perfil.email}}</h4>
+				</div>
+			</div>
+		</div>
+
+		<div class="col-md-8">
+			<div class="ibox float-e-margins">
+    			<div class="ibox-title"><h5>{{title}}</h5></div>
+    			<div class="ibox-tools"></div>
+	    		<div class="ibox-content">
+	                    
+						<div class="row">
+		                	<div class="col-md-5">
+		    					<div class="input-group m-b">
+		    						<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+		    						<input type="text" class="form-control" placeholder="Email" name="email" value="{{perfil.email}}">
+		    					</div>
+		    				</div>
+		                    <div class="col-md-5">
+		                        <div class="input-group m-b">
+		                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+		                            <input type="text" class="form-control" placeholder="Nombres" name="nombres" value="{{perfil.nombres}}">
+		                        </div>
+		                    </div>
+		                </div>
+
+		                <div class="row">
+		                    <div class="col-md-5">
+		                        <div class="input-group m-b">
+		                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+		                            <input type="text" class="form-control" placeholder="Apellidos" name="apellidos" value="{{perfil.apellidos}}">
+		                        </div>
+		                    </div>
+		                    <div class="col-md-5">
+		                        <div class="input-group m-b">
+		                            <span class="input-group-addon"><i class="fa fa-phone"></i></span>
+		                            <input type="number" class="form-control" placeholder="Telefono" name="telefono" value="{{perfil.telefono}}">
+		                        </div>
+		                    </div>
+		                </div>
+		                
+
+	    		</div>
+	    		<div class="ibox-footer" >
+
+					<div style="margin-left: 40%">
+	    				<button ng-click="actualizarperfil()" type="button" class="btn btn-outline btn-primary dim">
+	    					<i class="fa fa-check"></i>
+	    				</button>
+    				</div>
+
+	    		</div>
+    		</div>
+		</div>
+
+	</div>
+
+</div>
+
+<script>
+	function archivo(evt) {
+        var files = evt.target.files; // FileList object
+
+        //Obtenemos la imagen del campo "file". 
+        for (var i = 0, f; f = files[i]; i++) {
+            //Solo admitimos imágenes.
+            if (!f.type.match('image.*')) {
+                continue;
+            }
+
+            var reader = new FileReader();
+
+            reader.onload = (function(theFile) {
+                return function(e) {
+                    // Creamos la imagen.
+                    document.getElementById("image").innerHTML = ['<center><img class="img-responsive" alt="User profile picture" id="img"  src="', e.target.result, '" title="', escape(theFile.name), '"/></center>'].join('');
+                };
+            })(f);
+            reader.readAsDataURL(f);
+        }
+    }
+    
+    document.getElementById('files').addEventListener('change', archivo, false);
+
+    $(':file').change(function(){
+        //obtenemos un array con los datos del archivo
+        var file = $("#files")[0].files[0];
+        //obtenemos el nombre del archivo
+        var fileName = file.name;
+        //obtenemos la extensión del archivo
+        //document.getElementById("nombreImagen").value=fileName;
+        fileExtension = fileName.substring(fileName.lastIndexOf('.') + 1);
+        //obtenemos el tamaño del archivo
+        var fileSize = file.size;
+        //obtenemos el tipo de archivo image/png ejemplo
+        var fileType = file.type;
+        
+        $("#cambiar").show();
+        //mensaje con la información del archivo
+        // alert("<span class='info'>Archivo para subir: "+fileName+", peso total: "+fileSize+" bytes.</span>");
+    });
+</script>

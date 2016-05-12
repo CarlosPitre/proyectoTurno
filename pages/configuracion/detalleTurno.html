@@ -1,0 +1,59 @@
+<div ng-controller="clienteReservaController">
+	<div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-10">
+            <h2>Detalles de Reserva</h2>
+            <ol class="breadcrumb">
+                <li><a href="#configuracion/index">Inicio</a></li>
+                <li class="active"><strong >Mis turnos</strong></li>
+            </ol>
+        </div>
+    </div><br>
+
+	<div class="col-md-12">
+		<div class="ibox float-e-margins">
+			<div class="ibox-title"><h5>Lista De Reservas</h5></div>
+			<div class="ibox-content">
+				<div class="input-group m-b">
+					<span class="input-group-addon"><i class="fa fa-info"></i></span>
+					<input type="text" maxlength="10" size="10" class="form-control" placeholder="Busqueda" ng-model = "filtro">
+				</div>
+				<div class="row">
+					<div class="table-responsive">
+						<table class="table table-condensed table-bordered table-striped" ng-table="tableParams" class="table table-hover" show-filter="true">
+							<tr ng-repeat="turno in Turnos | filter : filtro">
+								<td title="'Fecha'">{{turno.fechaReserva}}</td>
+				                <td title="'Hora'">{{turno.horaReserva}}</td>
+				                <td title="'Servicio'">{{turno.servicio}}</td>
+				                <td title="'Sucursal'">{{turno.sucursal}}</td>
+				                <td title="'Empleado'">{{turno.empleado}}</td>
+				                <td>
+				                	<a href="javascript:;" ng-click="eliminarTurno(turno.serial)">Eliminar</a>
+				                </td>
+							</tr>
+						</table>
+					</div>
+				</div>
+			</div>
+		</div>
+
+
+	</div>
+
+	<div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+            	<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                </div>
+                <div class="modal-body">
+                    <h3><center>Esta Seguro Que Desea Eliminar el Turno?</center></h3>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+                    <button type="button" class="btn btn-primary" ng-click="ConfirmarEliminar()">Aceptar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>

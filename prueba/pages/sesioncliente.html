@@ -1,0 +1,104 @@
+<div ng-controller="inicioclienteController">
+	
+	<div class="loginColumns animated fadeInDown">
+        <div class="row">
+
+            <div class="col-md-6">
+                <div class="animated bounceInRight">
+                	<center>
+
+	                    <img src="images/turnomovil.png" style="height: 100px; width: 170px;margin-top: 40px">
+	                    <h3 class="font-bold" style="color: #db3e2d">{{title}}</h3>
+	                </center>
+            	</div><br>
+
+            </div>
+            <div class="col-md-6">
+            	<center><h3 style="color: #db3e2d">INICIO DE SESIÓN</h3></center>
+                <div class="ibox-content">
+                	<form >
+                        <div class="form-group">
+                            <input type="email" name="correo" class="form-control" placeholder="Email" >
+                        </div>
+                        <div class="form-group">
+                            <input type="password" name="pass" class="form-control" placeholder="Contraseña" >
+                        </div>
+                        <button class="btn btn-danger block full-width m-b" ng-click="ingresar()" style="background-color: #bf1c1a">Ingresar</button>
+
+                        <a ng-click="modal()">
+                            <small>¿Olvidaste tu contraseña?</small>
+                        </a><br><br>
+
+                        <!--<p class="text-muted text-center">
+                            <small>registrarse como usuario</small>
+                        </p>-->
+
+                        <a class="btn btn-sm btn-white btn-block" href="#/registrarcliente">Registrarse como cliente</a>
+                        <a class="btn btn-success btn-facebook btn-block" id="facebookLogin">
+                            <i class="fa fa-facebook"></i>
+                            Iniciar Sesión con facebook
+                        </a>
+                    </form><br>
+                    <!--<p class="m-t">
+                        <small>Inspinia we app framework base on Bootstrap 3 &copy; 2014</small>
+                    </p>-->
+                </div>
+            </div>
+        </div>
+        <hr/>
+
+        <div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true">
+            <div class="modal-dialog">
+                <div class="modal-content animated bounceInRight">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <img src="images/turnomovil.png" style="height: 70px; width: 120px;margin-top: 20px">
+                        <h4 class="modal-title">Recupera tu cuenta de turnomovil</h4>
+                        <small class="font-bold"></small>
+                    </div>
+                    <div class="modal-body">
+                        <h4><center>Escribe tu correo para recuperar tu contraseña</center></h4>
+                        <div class="row">
+                            <div class="col-md-3"></div>
+                            <div class="col-md-6">
+                                <center>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" placeholder="Email" name="buscar" >
+                                    </div>
+                                </center>
+                            </div>
+                            <div class="col-md-3">
+                                <button type="button" class="btn btn-w-m btn-success" ng-click="buscar()">Buscar</button>
+                            </div>
+                        </div>
+                        <br>
+                        <div ng-if="estado == true">
+                            <h3>{{noencontrado}}</h3>
+                        </div>
+                        <div class="row">
+                            <div ng-if="estado1 == true">
+                                <div class="col-md-12">
+                                    <h4>Tu nombre es {{encontrado.nombres}} {{encontrado.apellidos}} Se le enviará un correo electronico, al momento de enviar esta solicitud y un enlace para cambiar su Contraseña.</h4>
+                                    <input type="hidden" value="{{encontrado.id}}" name="iden">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-white" data-dismiss="modal">Cerrar</button>
+                        <button type="button" ng-click="enviaremail()" class="btn btn-primary">Enviar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <!--<div class="col-md-6">
+                Copyright Example Company
+            </div>
+            <div class="col-md-6 text-right">
+               <small>© 2014-2015</small>
+            </div>-->
+        </div>
+    </div>
+
+</div>

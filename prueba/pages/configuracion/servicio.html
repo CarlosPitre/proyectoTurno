@@ -1,0 +1,180 @@
+<div ng-controller="servicioController">
+    <div class="row wrapper border-bottom white-bg page-heading">
+        <div class="col-md-10">
+            <h2>Servicios</h2>
+            <ol class="breadcrumb">
+                <li><a href="#configuracion/index">Inicio</a></li>
+                <li class="active"><strong >Servicios</strong></li>
+                <li class="active"><a href="#configuracion/empresa"><strong >Paso 2 de 5</strong></a></li>
+            </ol>
+        </div>
+    </div><br>
+	<div class="col-md-5">
+    	<div class="ibox float-e-margins">
+    		<div class="ibox-title"><h5>{{title}}</h5></div>
+    		<dvi class="ibox-tools"></dvi>
+    		<div class="ibox-content">
+                <div class="row">
+                	<div class="col-md-10">
+    					<div class="input-group m-b">
+    						<span class="input-group-addon"><i class="fa fa-keyboard-o"></i></span>
+    						<input type="text" class="form-control" placeholder="Nombre Servicio" name="nombreservicio">
+    					</div>
+    				</div>
+                </div>
+                <div class="row">
+                	<div class="col-md-10" >
+                                        <h5>Seleccione Sector</h5>
+    					<div class="input-group m-b">
+                                                <span class="input-group-addon"><i class="fa fa-hand-o-right"></i></span>
+    						<select class="form-control" data-live-search="true" name="idsector" ng-model="idempresa" placeholder="Sectores">
+                                <option ng-repeat="sector in listasectores" value="{{sector.id}}">      {{sector.nombre}}
+                                </option>
+                            </select>
+    					</div>
+    				</div>
+                </div>
+                <div class="row">
+                	<div class="col-md-10">
+    					<div class="input-group m-b">
+    						<span class="input-group-addon"><i class="fa fa-clipboard"></i></span>
+    						<textarea class="form-control" name="descripcion" placeholder="Descripcion" rows="3"></textarea>
+    					</div>
+    				</div>
+                </div>
+    			
+    		</div>
+    		<div class="ibox-footer" >
+    			<div style="margin-left: 40%">
+    				<button ng-click="registrar()" type="button" class="btn btn-outline btn-primary dim">
+    					<i class="fa fa-check"></i>
+    				</button>
+    			</div>
+    		</div>
+    	</div>
+    </div>
+
+    <div class="col-md-7">
+    	<div class="ibox float-e-margins">
+    		<div class="ibox-title"><h5>{{title1}}</h5></div>
+    		<dvi class="ibox-tools"></dvi>
+    		<div class="ibox-content">
+                <div class="row">
+                	<div class="table-responsive">
+	                    
+                            <table class="table table-condensed table-bordered table-striped" ng-table="tableParams">
+                            <tr ng-repeat="servicios in $data">
+                                <td title="'Sector'" filter="{ 'sector': 'text'}">{{servicios.sector}}</td>
+                                <td title="'Servicio'" filter="{ 'nombre': 'text'}">{{servicios.nombre}}</td>
+                                <td title="'Descripcion'" filter="{ 'descripcion': 'text'}">{{servicios.descripcion}}</td>
+                                <td title="'Estado'" filter="{ 'estado': 'text'}"><span ng-if="servicios.estado == 'INACTIVO'" style="color: red">{{servicios.estado}}</span>
+                                    <span ng-if="servicios.estado == 'ACTIVO'" style="color: green">{{servicios.estado}}</span></td>
+                                <td title="'Ajuste'">
+                                    <center>
+                                        <a href="javascript:;" title="Editar" ng-click="get(servicios)">
+                                            <i class="fa fa-pencil"></i>
+                                        </a>
+                                    </center>
+                                </td>
+                                <td title="'Activar'">
+                                    <center>
+                                        <a ng-if="servicios.estado=='INACTIVO'" href="javascript:;" title="Activar servicio" ng-click="getestado(servicios)">
+                                            <i class="fa fa-check"></i>
+                                        </a>
+                                        <a href="javascript:;" ng-if="servicios.estado=='ACTIVO'" title="Desactivar servicio" ng-click="getestadodesactivar(servicios)">
+                                            <i class="fa fa-times"></i>
+                                        </a>
+                                    </center>
+                                </td>
+                            </tr>
+                        </table>
+  
+		            </div>
+                </div>
+
+                <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content animated bounceInRight">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <i class="fa fa-laptop modal-icon"></i>
+                                <h4 class="modal-title">Activar Estado</h4>
+                                <small class="font-bold"></small>
+                            </div>
+                            <div class="modal-body">
+                                <h4><center>Actualizar Servicios</center></h4>
+                                <h5><center></center></h5>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="input-group m-b">
+                                            <span class="input-group-addon"><i class="fa fa-map"></i></span>
+                                            <input type="text" class="form-control" placeholder="Nit" name="nit" ng-model="servicios.nombre">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <div class="input-group m-b">
+                                            <span class="input-group-addon"><i class="fa fa-clipboard"></i></span>
+                                            <textarea class="form-control" name="descripcion" placeholder="Descripcion" rows="3" ng-model="servicios.descripcion"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" ng-click="modificarservicio()">Actualizar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content animated bounceInRight">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <i class="fa fa-laptop modal-icon"></i>
+                                <h4 class="modal-title">Desactivar Estado</h4>
+                                <small class="font-bold"></small>
+                            </div>
+                            <div class="modal-body">
+                                <h4><center>Desactivar estado del servicio?</center></h4>
+                                <h5><center></center></h5>
+                                <input type="hidden" name="" ng-model="empresa.estado">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" ng-click="desactivarestado()">Desactivar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal inmodal" id="myModal2" tabindex="-1" role="dialog" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content animated bounceInRight">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                <i class="fa fa-laptop modal-icon"></i>
+                                <h4 class="modal-title">Activar Estado</h4>
+                                <small class="font-bold"></small>
+                            </div>
+                            <div class="modal-body">
+                                <h4><center>¿Activar estado del servicio?</center></h4>
+                                <h5><center></center></h5>
+                                <input type="hidden" name="" ng-model="empresa.estado">
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" ng-click="activarestado()">Activar</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+    			
+    		</div>
+    		
+    	</div>
+    </div>
+</div>
