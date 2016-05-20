@@ -26,6 +26,9 @@
 				                <td title="'Apellidos'">{{cliente.apellidos}}</td>
 				                <td title="'Telefono'">{{cliente.telefono}}</td>
 				                <td>
+				                	<a href="javascript:;" ng-click="editarCliente(cliente)">Editar</a>
+				                </td>
+				                <td>
 				                	<a href="#/configuracion/cliente/{{cliente.id}}/reservas">Ver Turnos</a>
 				                </td>
 							</tr>
@@ -34,8 +37,57 @@
 				</div>
 			</div>
 		</div>
-
-
 	</div>
+
+	 <div class="modal inmodal" id="myModal1" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content animated bounceInRight">
+            	<div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                    <center><h3>EDITAR EL CLIENTE</h3></center>
+                </div>
+                <div class="modal-body">
+					
+					<div class="row">
+						<div class="col-md-6">
+							<div class="input-group m-b">
+								<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+								<input type="text" class="form-control" placeholder="Email" ng-model = "Cliente.email" name="email" >
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="input-group m-b">
+								<span class="input-group-addon"><i class="fa fa-user"></i></span>
+								<input type="text" class="form-control" placeholder="Nombres" ng-model = "Cliente.nombres" name="nombres">
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-md-6">
+							<div class="input-group m-b">
+								<span class="input-group-addon"><i class="fa fa-user"></i></span>
+								<input type="text" class="form-control" placeholder="Apellidos" ng-model = "Cliente.apellidos" name="apellidos">
+							</div>
+						</div>
+						<div class="col-md-6">
+							<div class="input-group m-b">
+								<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+								<input type="text" placeholder="Telefono" class="form-control" ng-model = "Cliente.telefono" name="celular">
+							</div>
+						</div>
+					</div>
+					
+					<div>
+						<button ng-click="update()" type="button" class="btn btn-w-m btn-success">Editar Cliente
+						</button>
+					</div>				
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-white" data-dismiss="modal">Cancelar</button>
+
+                </div>
+            </div>
+        </div>
 
 </div>

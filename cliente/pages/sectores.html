@@ -1,0 +1,32 @@
+<div class="white divInterno" ng-controller="sectoresControler">
+	  <nav>
+	    <div class="nav-wrapper red">
+	      <ul id="nav-mobile" class="left hide-on-med-and-down">
+	        <li ><a href="javascript:;">Principal</a></li>
+	      </ul>
+	    </div>
+	  </nav>
+	  <div class="">
+	  	<div class="input-field col s12 ">
+	      <input placeholder = "Buscar" id="email" type="email" class="black-text">
+	    </div>
+	  </div>
+	  <div class="row">
+	  	<table class="bordered">
+	  		<tbody>
+	  			<tr ng-repeat="sector in Sectores">
+					<td style="width: 20px;">
+						<a href="">
+							<img src="http://localhost/proyectoturno/api{{sector.logo}}" alt="" style="width: 30px;height: 30px;">
+						</a>						
+					</td>
+					<td>
+						<a href="#/home/sector/{{sector.id}}/sucursales" class="black-text">
+							{{sector.nombre}}
+						</a>
+					</td>
+	  			</tr>
+	  		</tbody>
+	  	</table>
+	  </div>
+</div>

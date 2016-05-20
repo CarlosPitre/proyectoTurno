@@ -2,6 +2,7 @@ app.controller('misclienteController', function ($scope,ngTableParams,$filter,mi
 
 	$scope.Idsucursal = session.getIdsucursal();
 	$scope.misClientes = [];
+    $scope.Cliente = {};
 
 	misclientes();
 
@@ -39,6 +40,34 @@ app.controller('misclienteController', function ($scope,ngTableParams,$filter,mi
                 b.total(c.length);
                 a.resolve($scope.usuario);
             }
+        });
+    }
+
+    $scope.editarCliente = function  (cliente) {
+        $("#myModal1").modal('show');
+        $scope.Cliente = cliente;
+    }
+
+    $scope.update = function  () {
+        var object = {
+            "email":        $scope.Cliente.email,
+            "nombres":      $scope.Cliente.nombres,
+            "apellidos":    $scope.Cliente.apellidos,
+            "telefono":     $scope.Cliente.telefono,
+            "pass":         "",
+        };
+
+        var promiseGet = misclienteService.put(object,$scope.Cliente.id);
+        promiseGet.then(function (pl) {
+            if(pl.data != null){
+                $("#myModal1").modal('hide');
+                alert(JSON.stringify(pl.data.msg));
+                misClientes();
+
+            }
+        },
+        function (errorPl) {
+            console.log('failure loading search', errorPl);
         });
     }
 

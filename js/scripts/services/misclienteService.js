@@ -5,4 +5,9 @@ app.service("misclienteService", function ($http) {
         return req;       
     };
 
+    this.put = function  (object,id) {
+    	var req = $http.put(uri+'/cliente/'+id, object);
+        return req;
+    }
+
 })

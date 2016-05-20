@@ -226,9 +226,9 @@ class ClienteControl{
       $cliente->nombres   =   $data['nombres'];
       $cliente->apellidos =   $data['apellidos'];
       $cliente->telefono  =   $data['telefono'];
-      $cliente->pass      =   sha1($data['pass']);
-      $cliente->idPush    =   "01";//$data['idPush'];
-      $cliente->idFace    =   "01";//$data['idFace'];
+      if ($data['pass'] != "") {
+        $cliente->pass      =   sha1($data['pass']);
+      }      
       $cliente->save();
       $respuesta = json_encode(array('msg' => "Guardado correctamente", "std" => 1));
       $response = $response->withStatus(200);

@@ -104,65 +104,65 @@
                                 <div class="row">
                                 	<div class="col-md-2"></div>
                                 	<div class="col-md-6">
-																		<div class="input-group m-b">
-																			<span class="input-group-addon"><i class="fa fa-info"></i></span>
-																			<input type="text" maxlength="10" size="10" class="form-control" placeholder="Busqueda" ng-model = "filtro">
-																		</div>
+										<div class="input-group m-b">
+											<span class="input-group-addon"><i class="fa fa-info"></i></span>
+											<input type="text" maxlength="10" size="10" class="form-control" placeholder="Busqueda" ng-model = "filtro">
+										</div>
                                 	</div>
                                 	<div class="col-md-3">
                                 		<a href="javascript:;" class="btn btn-primary" ng-click="buscarcliente()">{{title}}</a>
                                 	</div>
                                 </div>
-																<div ng-show = "open">
-																	<div class="table-responsive">
-																		<table class="table table-condensed table-bordered table-striped" ng-table="tableParams" class="table table-hover" show-filter="true">
-																			<tr ng-repeat="cliente in misClientes| filter : filtro">
-																				<td title="'Email'">{{cliente.email}}</td>
-																				<td title="'Nombre'">{{cliente.nombres}}</td>
-																				<td title="'Apellidos'">{{cliente.apellidos}}</td>
-																				<td title="'Telefono'">{{cliente.telefono}}</td>
-																				<td>
-																					<button type="button" class="btn btn-primary" ng-click="postreservar(cliente.id)">Aceptar</button>
-																				</td>
-																			</tr>
-																		</table>
-																	</div>
-																</div>
-																<div ng-hide = "open">
-																	<div class="row">
-																		<div class="col-md-6">
-																			<div class="input-group m-b">
-																				<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-																				<input type="text" class="form-control" placeholder="Email" name="email">
-																			</div>
-																		</div>
-																		<div class="col-md-6">
-																			<div class="input-group m-b">
-																				<span class="input-group-addon"><i class="fa fa-user"></i></span>
-																				<input type="text" class="form-control" placeholder="Nombres" name="nombres">
-																			</div>
-																		</div>
-																	</div>
-																	<div class="row">
-																		<div class="col-md-6">
-																		<div class="input-group m-b">
-																		<span class="input-group-addon"><i class="fa fa-user"></i></span>
-																		<input type="text" class="form-control" placeholder="Apellidos" name="apellidos">
-																		</div>
-																		</div>
-																		<div class="col-md-6">
-																		<div class="input-group m-b">
-																		<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
-																		<input type="number" placeholder="Telefono" class="form-control" name="celular">
-																		</div>
-																		</div>
-																	</div>
-																	
-																	<div>
-																		<button ng-click="registrarse()" type="button" class="btn btn-w-m btn-success">Registrar Cliente
-																		</button>
-																	</div>
-																</div>
+								<div ng-show = "open">
+									<div class="table-responsive">
+										<table class="table table-condensed table-bordered table-striped" ng-table="tableParams" class="table table-hover" show-filter="true">
+											<tr ng-repeat="cliente in misClientes| filter : filtro">
+												<td title="'Email'">{{cliente.email}}</td>
+												<td title="'Nombre'">{{cliente.nombres}}</td>
+												<td title="'Apellidos'">{{cliente.apellidos}}</td>
+												<td title="'Telefono'">{{cliente.telefono}}</td>
+												<td>
+													<button type="button" class="btn btn-primary" ng-click="postreservar(cliente.id)">Aceptar</button>
+												</td>
+											</tr>
+										</table>
+									</div>
+								</div>
+								<div ng-hide = "open">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="input-group m-b">
+												<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+												<input type="text" class="form-control" placeholder="Email" name="email">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="input-group m-b">
+												<span class="input-group-addon"><i class="fa fa-user"></i></span>
+												<input type="text" class="form-control" placeholder="Nombres" name="nombres">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+										<div class="input-group m-b">
+										<span class="input-group-addon"><i class="fa fa-user"></i></span>
+										<input type="text" class="form-control" placeholder="Apellidos" name="apellidos">
+										</div>
+										</div>
+										<div class="col-md-6">
+										<div class="input-group m-b">
+										<span class="input-group-addon"><i class="fa fa-mobile"></i></span>
+										<input type="number" placeholder="Telefono" class="form-control" name="celular">
+										</div>
+										</div>
+									</div>
+									
+									<div>
+										<button ng-click="registrarse()" type="button" class="btn btn-w-m btn-success">Registrar Cliente
+										</button>
+									</div>
+								</div>
 
                             </div>
                             <div class="modal-footer">
